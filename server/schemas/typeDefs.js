@@ -1,30 +1,67 @@
 const { gql } = require('apollo-server-express');
 
 const typeDefs = gql`
-  type Thought {
-    _id: ID
-    thoughtText: String
-    thoughtAuthor: String
-    createdAt: String
-    comments: [Comment]!
+type User {
+  _id: ID
+  username: String
+  email: String
+  password: String
+  events: [Event]
+}
+
+  type Auth {
+    token: ID!
+    user: User
   }
 
   type Comment {
     _id: ID
     commentText: String
+    commentAuthor: String
     createdAt: String
   }
 
+  type Event {
+    _id: ID
+    year: Int
+    month: Int
+    day: Int
+    hour: Int
+    summary: String
+    description: String
+    calendar_id: String
+    user_id: User
+    comments: [Comment]
+  }
+
+  input AddEventInput {
+    _id: ID
+    year: Int
+    month: Int
+    day: Int
+    hour: Int
+    summary: String
+    description: String
+    calendar_id: String
+    user_id: User
+    comments: [Comment]   
+  }
+
   type Query {
-    thoughts: [Thought]!
-    thought(thoughtId: ID!): Thought
+    users: [User]
+    user(username: String!): User
+    events(username: String): [Event]
+    event(eventId: ID!): Event
+    me: User
   }
 
   type Mutation {
-    addThought(thoughtText: String!, thoughtAuthor: String!): Thought
-    addComment(thoughtId: ID!, commentText: String!): Thought
-    removeThought(thoughtId: ID!): Thought
-    removeComment(thoughtId: ID!, commentId: ID!): Thought
+    addUser(username: String!, email: String!, password: String!): Auth
+    login(email: String!, password: String!): Auth
+    addEvent(input: AddEventInput): Event
+    addComment(eventId: ID!, commentText: String!): Event
+    removeEvent(eventId: ID!): Event
+    removeComment(eventId: ID!, commentId: ID!): Event
   }
 `;
 
