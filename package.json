@@ -1,5 +1,5 @@
 {
-  "name": "programming-thoughts",
+  "name": "scheduling-app",
   "version": "1.0.0",
   "description": "",
   "main": "server/server.js",
@@ -14,9 +14,9 @@
   "author": "",
   "license": "ISC",
   "devDependencies": {
-    "concurrently": "^5.1.0",
-    "eslint": "^7.12.1",
-    "eslint-config-prettier": "^6.15.0",
-    "prettier": "^2.1.2"
+    "concurrently": "^5.3.0"
+  },
+  "dependencies": {
+    "dotenv": "^10.0.0"
   }
 }

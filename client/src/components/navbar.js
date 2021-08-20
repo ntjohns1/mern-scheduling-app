@@ -20,7 +20,6 @@ export default function Navigation() {
                 <Navbar.Brand className='header-nav px-3'>
 					<FontAwesomeIcon icon={['fab', 'fa-play-circle']} size='2x'/>Music Notes
 				</Navbar.Brand>
-				<Toggle />
 				<Navbar.Toggle aria-controls='responsive-navbar-nav' />
 				<Navbar.Collapse id='responsive-navbar-nav'>
 					<Nav

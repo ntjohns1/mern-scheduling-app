@@ -7,7 +7,9 @@ import {
 } from '@apollo/client';
 import { setContext } from '@apollo/client/link/context';
 import { BrowserRouter as Router, Route } from 'react-router-dom';
-import Navigation from './components/Navbar';
+import Nav from './components/Navbar';
+import Home from './pages/homepage';
+import Login from './pages/login';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import { library } from '@fortawesome/fontawesome-svg-core'
 import { fas } from '@fortawesome/free-solid-svg-icons'
@@ -42,14 +44,13 @@ export default function App() {
 			<Router>
 				<div className='impDiv'>
 					{/* <Header /> */}
-					<Navigation />
+					<Nav />
 					<Route exact path='/'>
-						<Homepage />
+						<Home />
 					</Route>
 					<Route exact path='/login'>
 						<Login />
 					</Route>
-					<Footer />
 				</div>
 			</Router>
 		</ApolloProvider>

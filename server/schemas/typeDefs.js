@@ -42,9 +42,7 @@ type User {
     hour: Int
     summary: String
     description: String
-    calendar_id: String
-    user_id: User
-    comments: [Comment]   
+    calendar_id: String 
   }
 
   type Query {
