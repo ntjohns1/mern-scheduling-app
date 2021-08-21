@@ -18,7 +18,7 @@ export default function Navigation() {
                 className='mb-3'
                 style={{ backgroundColor: '#00334E' }}>
                 <Navbar.Brand className='header-nav px-3'>
-					<FontAwesomeIcon icon={['fab', 'fa-play-circle']} size='2x'/>Music Notes
+					<FontAwesomeIcon icon={'play-circle'}/> Music Notes
 				</Navbar.Brand>
 				<Navbar.Toggle aria-controls='responsive-navbar-nav' />
 				<Navbar.Collapse id='responsive-navbar-nav'>

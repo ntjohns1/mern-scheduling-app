@@ -10,6 +10,7 @@ import { BrowserRouter as Router, Route } from 'react-router-dom';
 import Nav from './components/Navbar';
 import Home from './pages/homepage';
 import Login from './pages/login';
+import Signup from './pages/signup';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import { library } from '@fortawesome/fontawesome-svg-core'
 import { fas } from '@fortawesome/free-solid-svg-icons'
@@ -50,6 +51,9 @@ export default function App() {
 					</Route>
 					<Route exact path='/login'>
 						<Login />
+					</Route>
+					<Route exact path='/signup'>
+						<Signup />
 					</Route>
 				</div>
 			</Router>
