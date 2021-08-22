@@ -50,7 +50,7 @@ export default function Signup() {
 		<>
 			<Container>
 				{/* This is needed for the validation functionality above */}
-				<Form noValidate validated={validated} onSubmit={handleFormSubmit}>
+				<Form className="p-5" noValidate validated={validated} onSubmit={handleFormSubmit}>
 					{/* show alert if server response is bad */}
 					<Alert
 						dismissible

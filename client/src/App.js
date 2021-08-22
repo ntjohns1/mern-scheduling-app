@@ -11,9 +11,14 @@ import Nav from './components/Navbar';
 import Home from './pages/homepage';
 import Login from './pages/login';
 import Signup from './pages/signup';
+import Portal from './pages/portal';
+import Students from './pages/students';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import { library } from '@fortawesome/fontawesome-svg-core'
 import { fas } from '@fortawesome/free-solid-svg-icons'
+import Schedule from './pages/schedule';
+import Comments from './pages/comments'
+import Calendar from './pages/calendar';
 
 library.add(fas);
 
@@ -43,11 +48,24 @@ export default function App() {
 	return (
 		<ApolloProvider client={client}>
 			<Router>
-				<div className='impDiv'>
-					{/* <Header /> */}
 					<Nav />
 					<Route exact path='/'>
 						<Home />
+					</Route>
+					<Route exact path='/portal'>
+						<Portal />
+					</Route>
+					<Route exact path='/students'>
+						<Students />
+					</Route>
+					<Route exact path='/schedule'>
+						<Schedule />
+					</Route>
+					<Route exact path='/calendar'>
+						<Calendar />
+					</Route>
+					<Route exact path='/comments'>
+						<Comments />
 					</Route>
 					<Route exact path='/login'>
 						<Login />
@@ -55,7 +73,6 @@ export default function App() {
 					<Route exact path='/signup'>
 						<Signup />
 					</Route>
-				</div>
 			</Router>
 		</ApolloProvider>
 	);
