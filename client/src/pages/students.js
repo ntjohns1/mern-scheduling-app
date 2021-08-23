@@ -1,18 +1,16 @@
-import { Container } from 'react-bootstrap';
+import { Card, Container, Table, Form, Button } from 'react-bootstrap';
 import PortalNav from '../components/PortalNav';
 export default function Students() {
     return (
-        <Container>
-        <PortalNav />
-        <div class="my-4">
-            <h3>Welcome to Student Management!</h3>
-
-            <div class="card p-4 m-4">
-                <div class="card-header">
+        <Container className='p-4 my-4'>
+            <PortalNav />
+            <h3 className='text-center'>Welcome to Student Management!</h3>
+            <Card className='p-4 my-4'>
+                <Card.Header>
                     <h4>View Current Students</h4>
-                </div>
-                <div class="card-body">
-                    <table class="table">
+                </Card.Header>
+                <Card.Body>
+                    <Table responsive>
                         <thead>
                             <tr>
                                 <th scope="col">ID</th>
@@ -25,48 +23,63 @@ export default function Students() {
                         </thead>
                         <tbody>
                             <tr>
+                                {/* Map Props Here */}
                                 <th scope="row" class="update-studentId" value="{{user.id}}">ID</th>
                                 <td><textarea class="update-firstname">firstName</textarea></td>
                                 <td><textarea class="update-lastname">lastName</textarea></td>
                                 <td><textarea class="update-email">email</textarea></td>
-                                <td><button class="btn btn-info update-student-btn" value="{{user.id}}"
-                                    type="button">Update</button></td>
-                                <td><button class="btn btn-danger delete-student-btn" value="{{user.id}}"
-                                    type="button">Delete</button></td>
+                                <td><Button
+                                    variant='info'
+                                    value="{{user.id}}"
+                                    type="button">
+                                    Update
+                                </Button></td>
+                                <td><Button
+                                    variant='danger'
+                                    value="{{user.id}}"
+                                    type="button">
+                                    Delete
+                                </Button></td>
                             </tr>
                         </tbody>
-                    </table>
-                </div>
+                    </Table>
+                </Card.Body>
 
-            </div>
+            </Card>
 
-            <div class="card p-4 m-4">
-                <div class="card-header">
+            <Card>
+                <Card.Header>
                     <h4>Add New Student</h4>
-                </div>
-                <div class="card-body"></div>
-                <p>Please note that when creating a student, their password is randomly generated. The password, which you
-                    will need to write down and share with your student, will appear in a pop up window.</p>
-                <p>The student will need the email address and the generated password to log in.</p>
-                <form class="form add-student-form">
-                    <div class="form-group">
-                        <label for="firstName-createStudent">Student First Name:</label>
-                        <input class="form-input" type="text" id="firstName-createStudent" />
-                    </div>
-                    <div class="form-group">
-                        <label for="lastName-createStudent">Student Last Name:</label>
-                        <input class="form-input" type="text" id="lastName-createStudent" />
-                    </div>
-                    <div class="form-group">
-                        <label for="email-createStudent">Student Email:</label>
-                        <input class="form-input" type="text" id="email-createStudent" />
-                    </div>
-                    <div class="form-group">
-                        <button class="btn btn-success" type="submit">Add Student</button>
-                    </div>
-                </form>
-            </div>
-        </div>
+                </Card.Header>
+                <Card.Body className="p-3">
+                    <p>Please note that when creating a student, their password is randomly generated. The password, which you
+                        will need to write down and share with your student, will appear in a pop up window.</p>
+                    <p>The student will need the email address and the generated password to log in.</p>
+                    <Form className="mb-3 px-3">
+                        <Form.Group className="mb-3 px-3" controlId="studentFirstName">
+                            <Form.Label>Student First Name</Form.Label>
+                            <Form.Control type="text" />
+                        </Form.Group>
+                        <Form.Group className="mb-3 px-3" controlId="studentLastName">
+                            <Form.Label>Student Last Name</Form.Label>
+                            <Form.Control type="text" />
+                        </Form.Group>
+                        <Form.Group className="mb-3 px-3" controlId="studentFirstName">
+                            <Form.Label>Student Email</Form.Label>
+                            <Form.Control type="email" />
+                            <Form.Text className="text-muted">
+                                We'll never share your email with anyone else.
+                            </Form.Text>
+                        </Form.Group>
+                        <Button
+                            className="mx-3"
+                            variant="success"
+                            type="submit">
+                            Add Student
+                        </Button>
+                    </Form>
+                </Card.Body>
+            </Card>
         </Container>
     )
 };

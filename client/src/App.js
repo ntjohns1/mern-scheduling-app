@@ -18,7 +18,7 @@ import { library } from '@fortawesome/fontawesome-svg-core'
 import { fas } from '@fortawesome/free-solid-svg-icons'
 import Schedule from './pages/schedule';
 import Comments from './pages/comments'
-import Calendar from './pages/calendar';
+import Cal from './pages/calendar';
 
 library.add(fas);
 
@@ -62,7 +62,7 @@ export default function App() {
 						<Schedule />
 					</Route>
 					<Route exact path='/calendar'>
-						<Calendar />
+						<Cal />
 					</Route>
 					<Route exact path='/comments'>
 						<Comments />
