@@ -19,6 +19,10 @@ const userSchema = new Schema({
     required: true,
     minlength: 5,
   },
+  isTeacher:{
+    type: Boolean,
+    default: false,
+  },
   events: [
     {
       type: Schema.Types.ObjectId,

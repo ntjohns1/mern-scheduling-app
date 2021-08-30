@@ -31,6 +31,12 @@ const resolvers = {
       const token = signToken(user);
       return { token, user };
     },
+    updateUser: async (parent, { _id, username, email }) => {
+        return await User.findByIdAndUpdate({ _id: _id }, { $set: { username: username, email: email }});
+    },
+    deleteUser: async (parent, { _id }) => {
+      return User.findByIdAndDelete({ _id: _id });
+    },
     login: async (parent, { email, password }) => {
       const user = await User.findOne({ email });
 

@@ -1,52 +1,55 @@
+import React, { useState } from 'react';
 import { Card, Container, Table, Form, Button } from 'react-bootstrap';
 import PortalNav from '../components/PortalNav';
+import StudentTable from '../components/StudentTable';
+import { useMutation } from '@apollo/client';
+import { ADD_USER } from '../utils/mutations';
+import Auth from '../utils/auth';
+
 export default function Students() {
+    // form input to add student
+    const [formState, setFormState] = useState({
+        username: '',
+        email: '',
+        password: 'password1234',
+    });
+    const [addUser, { data }] = useMutation(ADD_USER);
+
+    // update state based on form input changes
+    const handleChange = (event) => {
+        const { name, value } = event.target;
+
+        setFormState({
+            ...formState,
+            [name]: value,
+        });
+    };
+
+    // submit form
+    const handleFormSubmit = async (event) => {
+        event.preventDefault();
+        console.log(formState);
+
+        try {
+            const { data } = await addUser({
+                variables: { ...formState },
+            });
+
+            Auth.login(data.addUser.token);
+        } catch (e) {
+            console.error(e);
+        }
+        setFormState({
+            username: '',
+            email: '',
+            password: 'password1234',
+        });
+
+    };
     return (
         <Container className='p-4 my-4'>
             <PortalNav />
-            <h3 className='text-center'>Welcome to Student Management!</h3>
-            <Card className='p-4 my-4'>
-                <Card.Header>
-                    <h4>View Current Students</h4>
-                </Card.Header>
-                <Card.Body>
-                    <Table responsive>
-                        <thead>
-                            <tr>
-                                <th scope="col">ID</th>
-                                <th scope="col">First</th>
-                                <th scope="col">Last</th>
-                                <th scope="col">Email</th>
-                                <th scope="col"></th>
-                                <th scope="col"></th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <tr>
-                                {/* Map Props Here */}
-                                <th scope="row" class="update-studentId" value="{{user.id}}">ID</th>
-                                <td><textarea class="update-firstname">firstName</textarea></td>
-                                <td><textarea class="update-lastname">lastName</textarea></td>
-                                <td><textarea class="update-email">email</textarea></td>
-                                <td><Button
-                                    variant='info'
-                                    value="{{user.id}}"
-                                    type="button">
-                                    Update
-                                </Button></td>
-                                <td><Button
-                                    variant='danger'
-                                    value="{{user.id}}"
-                                    type="button">
-                                    Delete
-                                </Button></td>
-                            </tr>
-                        </tbody>
-                    </Table>
-                </Card.Body>
-
-            </Card>
-
+            <StudentTable />
             <Card>
                 <Card.Header>
                     <h4>Add New Student</h4>
@@ -55,26 +58,41 @@ export default function Students() {
                     <p>Please note that when creating a student, their password is randomly generated. The password, which you
                         will need to write down and share with your student, will appear in a pop up window.</p>
                     <p>The student will need the email address and the generated password to log in.</p>
-                    <Form className="mb-3 px-3">
-                        <Form.Group className="mb-3 px-3" controlId="studentFirstName">
-                            <Form.Label>Student First Name</Form.Label>
-                            <Form.Control type="text" />
+                    <Form onSubmit={handleFormSubmit} className="mb-3 px-3">
+                        <Form.Group className="mb-3 px-3" controlId="username">
+                            <Form.Label>Student Username</Form.Label>
+                            <Form.Control
+                                type="text"
+                                name="username"
+                                value={formState.username}
+                                onChange={handleChange}
+                            />
                         </Form.Group>
-                        <Form.Group className="mb-3 px-3" controlId="studentLastName">
-                            <Form.Label>Student Last Name</Form.Label>
-                            <Form.Control type="text" />
-                        </Form.Group>
-                        <Form.Group className="mb-3 px-3" controlId="studentFirstName">
+                        <Form.Group className="mb-3 px-3" controlId="email">
                             <Form.Label>Student Email</Form.Label>
-                            <Form.Control type="email" />
-                            <Form.Text className="text-muted">
-                                We'll never share your email with anyone else.
-                            </Form.Text>
+                            <Form.Control
+                                type="email"
+                                name="email"
+                                value={formState.email}
+                                onChange={handleChange}
+
+                            />
+                        </Form.Group>
+                        <Form.Group className="mb-3 px-3" controlId="studentFirstName">
+                            <Form.Label>Password</Form.Label>
+                            <Form.Control
+                                type="text"
+                                name="password"
+                                value={formState.password}
+                                onChange={handleChange}
+                            />
                         </Form.Group>
                         <Button
                             className="mx-3"
                             variant="success"
-                            type="submit">
+                            type="submit"
+                            style={{ cursor: 'pointer' }}
+                        >
                             Add Student
                         </Button>
                     </Form>

@@ -6,6 +6,7 @@ type User {
   username: String
   email: String
   password: String
+  isTeacher: Boolean
   events: [Event]
 }
 
@@ -55,6 +56,8 @@ type User {
 
   type Mutation {
     addUser(username: String!, email: String!, password: String!): Auth
+    updateUser(_id: ID!, username: String, email: String): User
+    deleteUser(_id: ID!): User
     login(email: String!, password: String!): Auth
     addEvent(input: AddEventInput): Event
     addComment(eventId: ID!, commentText: String!): Event

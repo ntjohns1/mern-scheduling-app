@@ -10,3 +10,12 @@ query {
     }
 `;
 
+export const GET_STUDENTS = gql `
+query {
+    users {
+      _id
+      username
+      email
+    }
+  }
+`;
