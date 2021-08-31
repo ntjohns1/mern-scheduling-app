@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Card, Container, Table, Form, Button } from 'react-bootstrap';
+import { Card, Container, Form, Button } from 'react-bootstrap';
 import PortalNav from '../components/PortalNav';
 import StudentTable from '../components/StudentTable';
 import { useMutation } from '@apollo/client';
@@ -13,7 +13,7 @@ export default function Students() {
         email: '',
         password: 'password1234',
     });
-    const [addUser, { data }] = useMutation(ADD_USER);
+    const addUser = useMutation(ADD_USER);
 
     // update state based on form input changes
     const handleChange = (event) => {

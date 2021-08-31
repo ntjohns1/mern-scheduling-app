@@ -35,6 +35,12 @@ type User {
     comments: [Comment]
   }
 
+  input UpdateUserInput {
+    _id: ID!
+    username: String
+    email: String
+}
+
   input AddEventInput {
     _id: ID
     year: Int
@@ -56,7 +62,11 @@ type User {
 
   type Mutation {
     addUser(username: String!, email: String!, password: String!): Auth
-    updateUser(_id: ID!, username: String, email: String): User
+    updateUser(
+      _id: ID
+      username: String
+      email: String
+    ): User
     deleteUser(_id: ID!): User
     login(email: String!, password: String!): Auth
     addEvent(input: AddEventInput): Event

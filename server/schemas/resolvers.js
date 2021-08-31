@@ -32,7 +32,16 @@ const resolvers = {
       return { token, user };
     },
     updateUser: async (parent, { _id, username, email }) => {
-        return await User.findByIdAndUpdate({ _id: _id }, { $set: { username: username, email: email }});
+      const user = await User.findOneAndUpdate(
+        { _id: _id },
+        {
+          $set: {
+            username: username,
+            email: email
+          }
+        },
+        { new: true });
+      return user;
     },
     deleteUser: async (parent, { _id }) => {
       return User.findByIdAndDelete({ _id: _id });
@@ -56,7 +65,7 @@ const resolvers = {
     },
     addEvent: async (parent, { input }, context) => {
       if (context.user) {
-        const event = await Event.create({...input, ['user_id']: context.user._id});
+        const event = await Event.create({ ...input, ['user_id']: context.user._id });
 
         await User.findOneAndUpdate(
           { _id: context.user._id },

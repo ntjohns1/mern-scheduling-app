@@ -25,18 +25,17 @@ export const ADD_USER = gql`
 `;
 
 export const UPDATE_USER = gql`
-mutation updateUser(
-  $_id: ID!,
-  $username: String, 
-  $email: String
-  ) {
-    updateUser(
-      _id: $_id,
-      username: $username, 
-      email: $email
-      ){
-        username
-        email
-    }
+mutation(
+    $_id: ID!,
+    $username: String,
+    $email: String
+ ) {
+  updateUser(
+    _id: $_id, 
+    username: $username, 
+    email: $email
+    ) {
+    _id
   }
-  `;
+ }`;
+
