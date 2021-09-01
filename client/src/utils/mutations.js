@@ -39,3 +39,11 @@ mutation(
   }
  }`;
 
+export const DELETE_USER = gql`
+mutation(
+    $_id: ID!
+) {
+  deleteUser(_id: $_id) {
+    _id
+  }
+}`;

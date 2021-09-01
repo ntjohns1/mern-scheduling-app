@@ -4,7 +4,7 @@ export default function Portal() {
     return (
         <Container>
             <PortalNav />
-            <div class="my-4">
+            <div className="my-4">
                 <h3>Welcome to the teacher portal!</h3>
                 <p>Use the above tabs to:</p>
                 <ul>

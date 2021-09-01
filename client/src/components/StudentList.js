@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Form, Row, Col, Button, InputGroup } from 'react-bootstrap';
+import { Form, Row, Col, InputGroup } from 'react-bootstrap';
 import UpdateUserBtn from './UpdateUserBtn';
 import DeleteUserBtn from './DeleteUserBtn';
 
@@ -12,7 +12,6 @@ export default function UpdateUser({ students }) {
 
     const handleChange = (event) => {
         const { name, value } = event.target;
-
         setFormState({
             ...formState,
             [name]: value,
@@ -21,7 +20,7 @@ export default function UpdateUser({ students }) {
 
     return (
             <InputGroup>
-                <Row>
+                <Row className='my-2'>
                     <Col xs={4}>
                         <Form.Control
                             value={formState.username}

@@ -10,7 +10,6 @@ export default function Navigation() {
     return (
         <>
             <Navbar
-                as={Link} to='/'
                 collapseOnSelect
                 sticky='top'
                 expand='lg'

@@ -43,8 +43,17 @@ const resolvers = {
         { new: true });
       return user;
     },
-    deleteUser: async (parent, { _id }) => {
-      return User.findByIdAndDelete({ _id: _id });
+    deleteUser: async (parent, { _id }, context) => {
+      try {
+        // if (context.user) {
+        const user = await User.deleteOne({ _id: _id });
+
+        return user;
+        // }
+        // throw new AuthenticationError('Not Logged In')
+      } catch (error) {
+        throw new AuthenticationError('No user was found');
+      }
     },
     login: async (parent, { email, password }) => {
       const user = await User.findOne({ email });

@@ -1,6 +1,6 @@
 import React from 'react';
 import { useQuery } from '@apollo/client';
-import { Card, Container } from 'react-bootstrap';
+import { Card, Col, Container, Row, } from 'react-bootstrap';
 import { GET_STUDENTS } from '../utils/queries';
 import StudentList from './StudentList';
 
@@ -11,20 +11,18 @@ export default function StudentTable() {
     return (
         <Container>
             <h3 className='text-center'>Welcome to Student Management!</h3>
-            <Card className='p-4 my-4'>
-                <Card.Header>
-                    <h4>View Current Students</h4>
-                </Card.Header>
+            <h4 className='my-4 text-center'>View Current Students</h4>
+            <div className='p-4 my-4 d-flex justify-content-center'>
                 {loading ? (
                     <div>Loading...</div>
                 ) : (
-                    <Card.Body>
+                    <div>
                         {students && students.map((student) => (
-                            <StudentList students={student} key={student.id} />
+                            <StudentList students={student} key={student._id} />
                         ))}
-                    </Card.Body>
+                    </div>
                 )}
-            </Card>
+            </div>
         </Container>
     )
 }

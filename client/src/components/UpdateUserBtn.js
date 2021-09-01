@@ -6,16 +6,10 @@ import { UPDATE_USER } from '../utils/mutations';
 
 export default function UpdateUserBtn({ formState }) {
     const [displayError, setDisplayError] = useState(null);
-
     const [updateUser, { error }] = useMutation(UPDATE_USER);
-
-    console.log({ ...formState });
-
-
     const handleUpdate = async (e) => {
         e.preventDefault();
         setDisplayError(null);
-
         // destructure state
         const {
             _id,
@@ -33,15 +27,16 @@ export default function UpdateUserBtn({ formState }) {
             alert("You Did It!");
         }
         catch (err) {
+            window.location.reload();
             return setDisplayError(`${err}`);
         }
     };
     return (
-    <Button
-    className='btn-info'
-    onClick={handleUpdate} 
-    >
-    Update    
-    </Button>
-   )
+        <Button
+            className='btn-info'
+            onClick={handleUpdate}
+        >
+            Update
+        </Button>
+    )
 }
