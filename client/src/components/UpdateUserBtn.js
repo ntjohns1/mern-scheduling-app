@@ -1,39 +1,47 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { useMutation } from '@apollo/client';
+import { Button } from 'react-bootstrap';
+
 import { UPDATE_USER } from '../utils/mutations';
 
 export default function UpdateUserBtn({ formState }) {
-    console.log(formState);
-    const [update] = useMutation(UPDATE_USER);
-    const {
-        username,
-        email
-    } = formState;
+    const [displayError, setDisplayError] = useState(null);
 
-    const buildInput = {
-        username: username,
-        email: email
-      };
+    const [updateUser, { error }] = useMutation(UPDATE_USER);
+
+    console.log({ ...formState });
+
+
     const handleUpdate = async (e) => {
+        e.preventDefault();
+        setDisplayError(null);
+
+        // destructure state
+        const {
+            _id,
+            username,
+            email,
+        } = formState;
         try {
-            await update({
+            await updateUser({
                 variables: {
-                    ...buildInput
+                    _id: _id,
+                    username: username,
+                    email: email
                 }
             });
-            console.log('yeppers!')
+            alert("You Did It!");
         }
         catch (err) {
-            return console.err;
+            return setDisplayError(`${err}`);
         }
-
-    }
-   return (
-    <button
+    };
+    return (
+    <Button
     className='btn-info'
     onClick={handleUpdate} 
     >
     Update    
-    </button>
+    </Button>
    )
 }

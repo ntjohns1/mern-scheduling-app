@@ -2,7 +2,7 @@ import React from 'react';
 import { useQuery } from '@apollo/client';
 import { Card, Container } from 'react-bootstrap';
 import { GET_STUDENTS } from '../utils/queries';
-import UpdateUser from './updateUser';
+import StudentList from './StudentList';
 
 export default function StudentTable() {
     // populate table with list of students
@@ -20,13 +20,11 @@ export default function StudentTable() {
                 ) : (
                     <Card.Body>
                         {students && students.map((student) => (
-                            <UpdateUser students={student} key={student.id} />
+                            <StudentList students={student} key={student.id} />
                         ))}
                     </Card.Body>
                 )}
-
             </Card>
-
         </Container>
     )
 }
