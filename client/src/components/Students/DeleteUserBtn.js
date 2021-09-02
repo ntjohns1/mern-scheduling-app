@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { useMutation } from '@apollo/client';
 import { Button } from 'react-bootstrap';
-import { DELETE_USER } from '../utils/mutations';
+import { DELETE_USER } from '../../utils/mutations';
 
 export default function DeletUserBtn({ formState }) {
     const [displayError, setDisplayError] = useState(null);

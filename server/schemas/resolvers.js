@@ -1,5 +1,5 @@
 const { AuthenticationError } = require('apollo-server-express');
-const { User, Event } = require('../models');
+const { User, Event, Message } = require('../models');
 const { signToken } = require('../utils/auth');
 
 const resolvers = {
@@ -85,20 +85,21 @@ const resolvers = {
       }
       throw new AuthenticationError('You need to be logged in!');
     },
-    addComment: async (parent, { eventId, commentText }, context) => {
+    addMessage: async (parent, { _id, messageText }, context) => {
       if (context.user) {
-        return Event.findOneAndUpdate(
-          { _id: eventId },
-          {
-            $addToSet: {
-              comments: { commentText, commentAuthor: context.user.username },
-            },
-          },
-          {
-            new: true,
-            runValidators: true,
-          }
+  
+        const message = await Message.create({
+          messageText,
+          messageAuthor: context.user.username
+        });
+
+        await User.findOneAndUpdate(
+          // context.user._id wont work, fix in typeDefs
+          { _id: _id },
+          { $addToSet: { messages: message._id } }
         );
+
+        return message;
       }
       throw new AuthenticationError('You need to be logged in!');
     },
@@ -117,15 +118,15 @@ const resolvers = {
       }
       throw new AuthenticationError('You need to be logged in!');
     },
-    removeComment: async (parent, { eventId, commentId }, context) => {
+    removeMessage: async (parent, { eventId, messageId }, context) => {
       if (context.user) {
         return Event.findOneAndUpdate(
           { _id: eventId },
           {
             $pull: {
-              comments: {
-                _id: commentId,
-                commentAuthor: context.user.username,
+              messages: {
+                _id: messageId,
+                messageAuthor: context.user.username,
               },
             },
           },

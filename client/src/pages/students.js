@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { Card, Container, Form, Button } from 'react-bootstrap';
 import PortalNav from '../components/PortalNav';
-import StudentTable from '../components/StudentTable';
+import StudentTable from '../components/Students/StudentTable';
 import { useMutation } from '@apollo/client';
 import { ADD_USER } from '../utils/mutations';
 import Auth from '../utils/auth';
@@ -13,7 +13,7 @@ export default function Students() {
         email: '',
         password: 'password1234',
     });
-    const addUser = useMutation(ADD_USER);
+    const [addUser] = useMutation(ADD_USER);
 
     // update state based on form input changes
     const handleChange = (event) => {
@@ -29,13 +29,20 @@ export default function Students() {
     const handleFormSubmit = async (event) => {
         event.preventDefault();
         console.log(formState);
-
+        const {
+            username,
+            email,
+            password
+        } = formState;
         try {
-            const { data } = await addUser({
-                variables: { ...formState },
+             await addUser({
+                variables: { 
+                    username: username,
+                    email: email,
+                    password: password
+                 },
             });
-
-            Auth.login(data.addUser.token);
+            alert("You Did It!");
         } catch (e) {
             console.error(e);
         }

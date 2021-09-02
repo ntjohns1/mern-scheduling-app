@@ -1,6 +1,6 @@
 import { Container, Card, Form, Button, Table } from "react-bootstrap";
 import PortalNav from "../components/PortalNav";
-export default function Comments() {
+export default function Messages() {
     const students = [
         {
             label: 'Timmy Hanson',
@@ -15,7 +15,7 @@ export default function Comments() {
             value: 'Jim Jackson',
         },
     ];
-    const comments = [
+    const messages = [
         {
             id: '1',
             date: '08/12/2021',
@@ -38,7 +38,7 @@ export default function Comments() {
         <Container>
             <PortalNav />
             <Card>
-                <h3>Welcome to Comment Management!</h3>
+                <h3>Student Messenger</h3>
                 <Form>
                     <Form.Group>
                         <Form.Label for="student-scheduleLesson" className='mb-2'>Select A Student: </Form.Label><br />
@@ -52,11 +52,11 @@ export default function Comments() {
                             ))}
                         </Form.Control>
                     </Form.Group>
-                    <Form.Group id="addComment">
+                    <Form.Group id="addMessage">
                         <Form.Label></Form.Label>
                         <Form.Control
                             as="textarea"
-                            placeholder="Leave a comment here"
+                            placeholder="Leave a message here"
                             style={{ height: '100px' }}
                         />
                     </Form.Group>
@@ -69,22 +69,22 @@ export default function Comments() {
                 </Form>
             </Card>
             <Card>
-                <div id="manageComments" class="card-body">
+                <div id="manageMessages" class="card-body">
                     <Table>
                         <thead>
                             <tr>
                                 <th scope="col"></th>
-                                <th scope="col">Comment</th>
+                                <th scope="col">Message</th>
                                 <th scope="col"></th>
                                 <th scope="col"></th>
                             </tr>
                         </thead>
                         <tbody>
-                            {comments.map((comment) => (
-                                <tr>
-                                    <th scope="row">{comment.date}:  </th>
-                                    <td><textarea id="pastCommentTxt"
-                                        class="form-control">{comment.text}</textarea>
+                            {messages.map((message) => (
+                                <tr key={message._id}>
+                                    <th scope="row">{message.date}:  </th>
+                                    <td><textarea id="pastMessageTxt"
+                                        class="form-control">{message.text}</textarea>
                                     </td>
                                     <td>
                                         <Button

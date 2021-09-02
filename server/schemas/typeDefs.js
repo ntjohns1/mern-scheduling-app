@@ -8,6 +8,7 @@ type User {
   password: String
   isTeacher: Boolean
   events: [Event]
+  messages: [Message]
 }
 
   type Auth {
@@ -15,10 +16,10 @@ type User {
     user: User
   }
 
-  type Comment {
+  type Message {
     _id: ID
-    commentText: String
-    commentAuthor: String
+    messageText: String
+    messageAuthor: String
     createdAt: String
   }
 
@@ -32,7 +33,6 @@ type User {
     description: String
     calendar_id: String
     user_id: User
-    comments: [Comment]
   }
 
   input UpdateUserInput {
@@ -70,9 +70,9 @@ type User {
     deleteUser(_id: ID!): User
     login(email: String!, password: String!): Auth
     addEvent(input: AddEventInput): Event
-    addComment(eventId: ID!, commentText: String!): Event
+    addMessage(_id: ID!, messageText: String!): Message
     removeEvent(eventId: ID!): Event
-    removeComment(eventId: ID!, commentId: ID!): Event
+    removeMessage(eventId: ID!, messageId: ID!): Event
   }
 `;
 

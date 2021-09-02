@@ -29,6 +29,12 @@ const userSchema = new Schema({
       ref: 'Event',
     },
   ],
+  messages: [
+    {
+      type: Schema.Types.ObjectId,
+      ref: 'Message',
+    },
+  ],
 });
 
 // set up pre-save middleware to create password

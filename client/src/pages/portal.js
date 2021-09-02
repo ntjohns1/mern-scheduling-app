@@ -10,7 +10,7 @@ export default function Portal() {
                 <ul>
                     <li>Manage Students: Add and Remove Students, Update existing student information</li>
                     <li>Manage Schedules: Select students to view their scheduled lessons. Add lessons to the schedule. Update and cancel lessons.</li>
-                    <li>Lesson Comments: Write lesson comments to your students and view history of lesson comments.</li>
+                    <li>Lesson Messages: Write lesson messages to your students and view history of lesson messages.</li>
                 </ul>
             </div>
         </Container>

@@ -17,7 +17,7 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import { library } from '@fortawesome/fontawesome-svg-core'
 import { fas } from '@fortawesome/free-solid-svg-icons'
 import Schedule from './pages/schedule';
-import Comments from './pages/comments'
+import Messages from './pages/messages'
 import Cal from './pages/calendar';
 
 library.add(fas);
@@ -65,8 +65,8 @@ export default function App() {
 					<Route exact path='/calendar'>
 						<Cal />
 					</Route>
-					<Route exact path='/comments'>
-						<Comments />
+					<Route exact path='/messages'>
+						<Messages />
 					</Route>
 					<Route exact path='/login'>
 						<Login />

@@ -1,4 +1,4 @@
-// see SignupForm.js for comments
+// see SignupForm.js for messages
 import React, { useState } from 'react';
 import { Form, Button, Alert, Container } from 'react-bootstrap';
 
