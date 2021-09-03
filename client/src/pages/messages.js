@@ -1,5 +1,5 @@
-import { Container, Card, Button, Table } from "react-bootstrap";
-import AddMessage from "../components/Messages/AddMessage";
+import { Container, Card } from "react-bootstrap";
+import SelectStudent from "../components/Messages/SelectStudent";
 import PortalNav from "../components/PortalNav";
 
 // Create AddMessage componenet
@@ -12,45 +12,13 @@ import PortalNav from "../components/PortalNav";
 // Deal with logic for sorting messages from a specific student
 
 export default function Messages() {
-    const students = [
-        {
-            label: 'Timmy Hanson',
-            value: 'Timmy Hanson',
-        },
-        {
-            label: 'Rachel Johnson',
-            value: 'Rachel Johnson',
-        },
-        {
-            label: 'Jim Jackson',
-            value: 'Jim Jackson',
-        },
-    ];
-    const messages = [
-        {
-            id: '1',
-            date: '08/12/2021',
-            text: 'Practice Scales',
-        },
-        {
-            id: '2',
-            date: '08/13/2021',
-            text: 'Lesson cancelled next week.',
-
-        },
-        {
-            id: '3',
-            date: '08/14/2021',
-            text: 'Call to reschedule.',
-        },
-    ];
 
     return (
         <Container>
             <PortalNav />
             <Card>
                 <h3>Student Messenger</h3>
-                <AddMessage students={students}/>
+                <SelectStudent />
                 {/* <Form>
                     <Form.Group>
                         <Form.Label for="student-scheduleLesson" className='mb-2'>Select A Student: </Form.Label><br />
@@ -81,51 +49,6 @@ export default function Messages() {
                 </Form> */}
             </Card>
             <Card>
-                <div id="manageMessages" class="card-body">
-                    <Table>
-                        <thead>
-                            <tr>
-                                <th scope="col"></th>
-                                <th scope="col">Message</th>
-                                <th scope="col"></th>
-                                <th scope="col"></th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            {messages.map((message) => (
-                                <tr key={message._id}>
-                                    <th scope="row">{message.date}:  </th>
-                                    <td><textarea id="pastMessageTxt"
-                                        class="form-control">{message.text}</textarea>
-                                    </td>
-                                    <td>
-                                        <Button
-                                            id="editBtn"
-                                            variant="info"
-                                            type="button"
-                                            style={{
-                                                left: '80%',
-                                            }}>
-                                            Update
-                                        </Button>
-                                    </td>
-                                    <td>
-                                        <Button
-                                            id="deleteBtn"
-                                            variant="danger"
-                                            type="button"
-                                            style={{
-            
-                                                left: '90%',
-                                            }}>
-                                            Delete
-                                        </Button>
-                                    </td>
-                                </tr>
-                            ))}
-                        </tbody>
-                    </Table>
-                </div>
             </Card>
         </Container>
 

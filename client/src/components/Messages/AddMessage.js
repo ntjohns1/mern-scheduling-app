@@ -1,51 +1,33 @@
 import React, { useState } from 'react';
-import { useQuery, useMutation } from "@apollo/client";
+import { useMutation } from "@apollo/client";
 import { ADD_MESSAGE } from '../../utils/mutations';
-import { GET_STUDENTS } from '../../utils/queries';
 import { Form, Button } from "react-bootstrap";
 
-export default function AddMessage() {
+export default function AddMessage({ studentId }) {
     const [addMessage] = useMutation(ADD_MESSAGE);
-    const { loading, data } = useQuery(GET_STUDENTS);
-    const students = data?.users || [];
-    const [studentId, setStudentId] = useState();
     const [messageText, setMessageText] = useState('');
     console.log(studentId);
-    console.log(messageText);
-
     const handleFormSubmit = async (event) => {
         event.preventDefault();
-        try {
-            await addMessage({
-                variables: {
-                    _id: studentId,
-                    messageText: messageText
-                },
-            });
-            alert("You Did It!");
-        } catch (e) {
-            console.error(e);
+        if (studentId) {
+            try {
+                await addMessage({
+                    variables: {
+                        _id: studentId,
+                        messageText: messageText
+                    },
+                });
+                alert("You Did It!");
+            } catch (e) {
+                console.error(e);
+            }
+            setMessageText('');
         }
-        setStudentId();
-        setMessageText('');
-
+        alert('Select a Student')
     }
 
     return (
         <Form onSubmit={handleFormSubmit}>
-            <Form.Group>
-                <Form.Control
-                    as="select"
-                    name='selectStudent'
-                    value={studentId}
-                    onChange={(e) => setStudentId(e.target.value)}
-                >
-                    <option disabled selected value> Select a Student </option>
-                    {students.map((option) => (
-                        <option value={option._id} key={option._id}>{option.username}</option>
-                    ))}
-                </Form.Control>
-            </Form.Group>
             <Form.Group id="addMessage">
                 <Form.Label></Form.Label>
                 <Form.Control
@@ -59,7 +41,6 @@ export default function AddMessage() {
                 as='input'
                 className='my-2'
                 type='submit'
-            // value='addLesson' 
             />
         </Form>
     )
