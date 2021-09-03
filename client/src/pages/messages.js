@@ -2,15 +2,6 @@ import { Container, Card } from "react-bootstrap";
 import SelectStudent from "../components/Messages/SelectStudent";
 import PortalNav from "../components/PortalNav";
 
-// Create AddMessage componenet
-// query to populate dropdown
-// remember to add .populate for messages in your resolver
-// Create AddMessageBtn component
-// mutation to add message
-// remember to add .populate for messages in your resolver
-// Create MessageHistory component
-// Deal with logic for sorting messages from a specific student
-
 export default function Messages() {
 
     return (

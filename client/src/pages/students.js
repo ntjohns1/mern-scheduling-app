@@ -4,7 +4,6 @@ import PortalNav from '../components/PortalNav';
 import StudentTable from '../components/Students/StudentTable';
 import { useMutation } from '@apollo/client';
 import { ADD_USER } from '../utils/mutations';
-import Auth from '../utils/auth';
 
 export default function Students() {
     // form input to add student

@@ -1,11 +1,11 @@
 import React, { useState } from 'react';
-import { useMutation, useQuery } from "@apollo/client";
+import { useMutation } from "@apollo/client";
 import { ADD_MESSAGE } from '../../utils/mutations';
-import { Form, Button, Toast } from "react-bootstrap";
+import { Form, Button } from "react-bootstrap";
 import { GET_STUDENT } from '../../utils/queries';
 
 export default function AddMessage({ studentId, setStudentId }) {
-    const [addMessage, { data, loading, error }] = useMutation(ADD_MESSAGE, {
+    const [addMessage] = useMutation(ADD_MESSAGE, {
         refetchQueries: [
           GET_STUDENT, // DocumentNode object parsed with gql
           'user' // Query name
@@ -22,10 +22,9 @@ export default function AddMessage({ studentId, setStudentId }) {
                     messageText: messageText
                 },
             });
-            alert('You Did It!')
         } catch (e) {
             console.error(e);
-            alert('select a user')
+            alert('Something Went Wrong')
         }
         setMessageText('');
     }

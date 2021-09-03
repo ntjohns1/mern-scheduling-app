@@ -5,7 +5,7 @@ import { DELETE_USER } from '../../utils/mutations';
 
 export default function DeletUserBtn({ formState }) {
     const [displayError, setDisplayError] = useState(null);
-    const [deleteUser, { error }] = useMutation(DELETE_USER);
+    const [deleteUser] = useMutation(DELETE_USER);
     const handleDelete = async (e) => {
         e.preventDefault();
         setDisplayError(null);
