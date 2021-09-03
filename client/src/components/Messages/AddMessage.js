@@ -1,30 +1,35 @@
 import React, { useState } from 'react';
-import { useMutation } from "@apollo/client";
+import { useMutation, useQuery } from "@apollo/client";
 import { ADD_MESSAGE } from '../../utils/mutations';
-import { Form, Button } from "react-bootstrap";
+import { Form, Button, Toast } from "react-bootstrap";
+import { GET_STUDENT } from '../../utils/queries';
 
-export default function AddMessage({ studentId }) {
-    const [addMessage] = useMutation(ADD_MESSAGE);
+export default function AddMessage({ studentId, setStudentId }) {
+    const [addMessage, { data, loading, error }] = useMutation(ADD_MESSAGE, {
+        refetchQueries: [
+          GET_STUDENT, // DocumentNode object parsed with gql
+          'user' // Query name
+        ],
+      });
     const [messageText, setMessageText] = useState('');
     console.log(studentId);
     const handleFormSubmit = async (event) => {
         event.preventDefault();
-        if (studentId) {
-            try {
-                await addMessage({
-                    variables: {
-                        _id: studentId,
-                        messageText: messageText
-                    },
-                });
-                alert("You Did It!");
-            } catch (e) {
-                console.error(e);
-            }
-            setMessageText('');
+        try {
+            await addMessage({
+                variables: {
+                    _id: studentId,
+                    messageText: messageText
+                },
+            });
+            alert('You Did It!')
+        } catch (e) {
+            console.error(e);
+            alert('select a user')
         }
-        alert('Select a Student')
+        setMessageText('');
     }
+
 
     return (
         <Form onSubmit={handleFormSubmit}>

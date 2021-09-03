@@ -54,7 +54,7 @@ type User {
 
   type Query {
     users: [User]
-    user(username: String!): User
+    user(_id: ID!): User
     events(username: String): [Event]
     event(eventId: ID!): Event
     me: User
