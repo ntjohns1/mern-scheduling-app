@@ -1,5 +1,16 @@
-import { Container, Card, Form, Button, Table } from "react-bootstrap";
+import { Container, Card, Button, Table } from "react-bootstrap";
+import AddMessage from "../components/Messages/AddMessage";
 import PortalNav from "../components/PortalNav";
+
+// Create AddMessage componenet
+// query to populate dropdown
+// remember to add .populate for messages in your resolver
+// Create AddMessageBtn component
+// mutation to add message
+// remember to add .populate for messages in your resolver
+// Create MessageHistory component
+// Deal with logic for sorting messages from a specific student
+
 export default function Messages() {
     const students = [
         {
@@ -39,7 +50,8 @@ export default function Messages() {
             <PortalNav />
             <Card>
                 <h3>Student Messenger</h3>
-                <Form>
+                <AddMessage students={students}/>
+                {/* <Form>
                     <Form.Group>
                         <Form.Label for="student-scheduleLesson" className='mb-2'>Select A Student: </Form.Label><br />
                         <Form.Control
@@ -66,7 +78,7 @@ export default function Messages() {
                         type='submit'
                     // value='addLesson' 
                     />
-                </Form>
+                </Form> */}
             </Card>
             <Card>
                 <div id="manageMessages" class="card-body">

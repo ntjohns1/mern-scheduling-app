@@ -70,7 +70,7 @@ type User {
     deleteUser(_id: ID!): User
     login(email: String!, password: String!): Auth
     addEvent(input: AddEventInput): Event
-    addMessage(_id: ID!, messageText: String!): Message
+    addMessage(_id: ID!, messageText: String): Message
     removeEvent(eventId: ID!): Event
     removeMessage(eventId: ID!, messageId: ID!): Event
   }

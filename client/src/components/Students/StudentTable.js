@@ -1,6 +1,6 @@
 import React from 'react';
 import { useQuery } from '@apollo/client';
-import { Card, Col, Container, Row, } from 'react-bootstrap';
+import { Container } from 'react-bootstrap';
 import { GET_STUDENTS } from '../../utils/queries';
 import StudentList from './StudentList';
 
