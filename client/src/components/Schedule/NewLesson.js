@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { useQuery } from "@apollo/client";
-import { GET_STUDENTS } from '../utils/queries';
+import { GET_STUDENTS } from '../../utils/queries';
 import { Card, Container, Form, Button } from "react-bootstrap";
 import PortalNav from "../components/PortalNav";
 import { DateUtils } from 'react-day-picker';
@@ -38,7 +38,7 @@ export default function Schedule() {
             value: '11',
         },
         {
-            label: '12:00pm',
+            label: '12:00am',
             value: '12',
         },
         {
@@ -70,9 +70,7 @@ export default function Schedule() {
     function onChange(date) {
         setDate(date);
     }
-    console.log(date);
-    console.log(time);
-    console.log(studentId);
+
     return (
         <Container>
             <PortalNav />
@@ -112,8 +110,8 @@ export default function Schedule() {
                             <Form.Control
                                 as="select"
                                 name='selectTime'
-                                value={time}
-                                onChange={(e) => setTime(e.target.value)}
+                                value={times.value}
+                                onChange={(e) => setDate(e.target.value)}
 
                             >
                                 {times.map((option) => (
