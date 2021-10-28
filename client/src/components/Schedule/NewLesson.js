@@ -2,12 +2,13 @@ import React, { useState } from 'react';
 import { useQuery } from "@apollo/client";
 import { GET_STUDENTS } from '../../utils/queries';
 import { Card, Container, Form, Button } from "react-bootstrap";
-import PortalNav from "../components/PortalNav";
 import { DateUtils } from 'react-day-picker';
 import DayPickerInput from "react-day-picker/DayPickerInput";
 import "react-day-picker/lib/style.css";
 import dateFnsFormat from 'date-fns/format';
 import dateFnsParse from 'date-fns/parse';
+const {format} = require('date-fns');
+
 
 function parseDate(str, format, locale) {
     const parsed = dateFnsParse(str, format, new Date(), { locale });
@@ -18,63 +19,31 @@ function parseDate(str, format, locale) {
 }
 
 function formatDate(date, format, locale) {
+    
     return dateFnsFormat(date, format, { locale });
 }
 
-export default function Schedule() {
+export default function NewLesson({ times }) {
     const { data } = useQuery(GET_STUDENTS);
     const students = data?.users || [];
-    const FORMAT = 'MM/dd/yyyy';
     const [studentId, setStudentId] = useState('');
-    const [date, setDate] = useState(new Date());
     const [time, setTime] = useState('')
-    const times = [
-        {
-            label: '10:00am',
-            value: '10',
-        },
-        {
-            label: '11:00am',
-            value: '11',
-        },
-        {
-            label: '12:00am',
-            value: '12',
-        },
-        {
-            label: '1:00pm',
-            value: '13',
-        },
-        {
-            label: '2:00pm',
-            value: '14',
-        },
-        {
-            label: '3:00pm',
-            value: '15',
-        },
-        {
-            label: '4:00pm',
-            value: '16',
-        },
-        {
-            label: '5:00pm',
-            value: '17',
-        },
-        {
-            label: '6:00pm',
-            value: '18',
-        },
-    ];
+    const [selectedDay, setSelectedDay] = useState(undefined)
+    const FORMAT = 'MM/dd/yyyy';
 
-    function onChange(date) {
-        setDate(date);
+    const dayChange = (day) => {
+        format(day, 'MM.dd.yyyy');
+        setSelectedDay(day)
     }
 
+    console.log('selectedDay', selectedDay)
+
+
+    console.log(time);
+    console.log(studentId);
     return (
+
         <Container>
-            <PortalNav />
-            <h3 className='mb-3 text-center'>Welcome to Schedule Management!</h3>
             <Card>
                 <Card.Header>
                     <h3>Schedule a Lesson</h3>
@@ -96,14 +65,21 @@ export default function Schedule() {
                             </Form.Control>
                         </Form.Group>
                         <Form.Group className='mb-3'>
-                            <Form.Label for="date-scheduleLesson">Select Date: </Form.Label><br />
+                            <Form.Label >Select Date: </Form.Label><br />
                             <DayPickerInput
-                                value={date}
-                                onChange={onChange}
+                                onDayChange={dayChange}
+                                hideOnDayClick={false}
+                                placeholder="mm/dd/yyyy"
                                 formatDate={formatDate}
                                 format={FORMAT}
                                 parseDate={parseDate}
-                                placeholder={`${dateFnsFormat(new Date(), FORMAT)}`} />
+                            />
+                        
+                            {/* {selectedDay ? (
+                                <p>You clicked {selectedDay.toLocaleDateString()}</p>
+                            ) : (
+                                <p>Please select a day.</p>
+                            )} */}
                         </Form.Group>
                         <Form.Group className='mb-3'>
                             <Form.Label for="time-scheduleLesson" className='mb-2'>Select A Time: </Form.Label>
@@ -111,7 +87,7 @@ export default function Schedule() {
                                 as="select"
                                 name='selectTime'
                                 value={times.value}
-                                onChange={(e) => setDate(e.target.value)}
+                                onChange={(e) => setTime(e.target.value)}
 
                             >
                                 {times.map((option) => (
@@ -119,6 +95,7 @@ export default function Schedule() {
                                 ))}
                             </Form.Control>
                         </Form.Group>
+
                         <Button
                             as='input'
                             className='my-2'

@@ -1,15 +1,5 @@
-import React, { useState } from 'react';
-import { useQuery } from "@apollo/client";
-import { GET_STUDENTS } from '../utils/queries';
-import { Card, Container, Form, Button } from "react-bootstrap";
-import PortalNav from "../components/PortalNav";
-import { DateUtils } from 'react-day-picker';
-import DayPickerInput from "react-day-picker/DayPickerInput";
-import "react-day-picker/lib/style.css";
-import dateFnsFormat from 'date-fns/format';
-import dateFnsParse from 'date-fns/parse';
-import NewLesson from '../components/Schedule/NewLesson';
-const times = [
+export default function times() {
+    times = [
     {
         label: '10:00am',
         value: '10:00am',
@@ -155,19 +145,5 @@ const times = [
         value: '18:45pm',
     },    
 ];
-
-
-
-export default function Schedule() {
-    return (
-        <Container>
-            <h3 className='mb-3 text-center'>Welcome to Schedule Management!</h3>
-            <NewLesson times={times}/>
-        </Container>
-    )
-}
-
-/*
-    {{#each students as |user|}}
-    <option>'ID, Firstname Last Name'</option>
-    /* {{/each}} */
+    return times
+};

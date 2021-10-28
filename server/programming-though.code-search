@@ -1,9 +1,0 @@
-# Query: programming-though
-# ContextLines: 1
-
-1 result - 1 file
-
-server/config/connection.js:
-  3  mongoose.connect(
-  4:   process.env.MONGODB_URI || 'mongodb://localhost/mern-scheduling-app',
-  5    {
