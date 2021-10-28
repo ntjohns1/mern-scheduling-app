@@ -1,7 +1,7 @@
 # lesson-scheduler-app
 
 ## Description (Work in Progress)
-[Music Notes](https://uncbootcampmusicnotes.herokuapp.com/) is an application to help music teachers easily manage their students. Users with a teacher role can manage student rosters and contact info, send students messages, schedule automated lesson and billing reminders, upload audio, video and pdf content, manage billing through stripe, and view day-to-day lesson schedules. Users with a student role can view customized lesson content, manage payment information, and recieve reminders about lesson and billing events. This is a continuation of a group project for the UNC Coding Bootcamp. I am rectoring the original codebase form a RESTful api with a mySQL database to a MERN application using GraphQL.<br>
+[Music Notes](https://uncbootcampmusicnotes.herokuapp.com/) is an application to help music teachers easily manage their students. Users with a teacher role can manage student rosters and contact info, send students messages, schedule automated lesson and billing reminders, upload audio, video and pdf content, manage billing through stripe, and view day-to-day lesson schedules. Users with a student role can view customized lesson content, manage payment information, and recieve reminders about lesson and billing events. This is a continuation of a group project for the UNC Coding Bootcamp. I am refactoring the original codebase form a RESTful api with a mySQL database to a MERN application using GraphQL.<br>
 
 ## Table of Contents
 
