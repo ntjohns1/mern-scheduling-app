@@ -5,7 +5,7 @@ import { Button } from 'react-bootstrap';
 import { UPDATE_USER } from '../../utils/mutations';
 
 export default function UpdateUserBtn({ formState }) {
-    const [displayError, setDisplayError] = useState(null);
+    const [setDisplayError] = useState(null);
     const [updateUser] = useMutation(UPDATE_USER);
     const handleUpdate = async (e) => {
         e.preventDefault();

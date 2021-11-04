@@ -12,7 +12,6 @@ export default function AddMessage({ studentId, setStudentId }) {
         ],
       });
     const [messageText, setMessageText] = useState('');
-    console.log(studentId);
     const handleFormSubmit = async (event) => {
         event.preventDefault();
         try {
