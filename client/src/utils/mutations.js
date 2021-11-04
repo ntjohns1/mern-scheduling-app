@@ -50,6 +50,17 @@ mutation(
   }
 }`;
 
+// Event Mutations
+
+export const ADD_EVENT = gql`
+mutation($input: AddEventInput) {
+  addEvent(input:$input) {
+    date
+  }
+}`;
+
+
+
 // Message Mutations
 
 export const ADD_MESSAGE = gql`

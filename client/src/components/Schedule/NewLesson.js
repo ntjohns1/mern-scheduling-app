@@ -1,46 +1,74 @@
 import React, { useState } from 'react';
-import { useQuery } from "@apollo/client";
+import { useQuery, useMutation } from "@apollo/client";
 import { GET_STUDENTS } from '../../utils/queries';
+import { ADD_EVENT } from '../../utils/mutations';
 import { Card, Container, Form, Button } from "react-bootstrap";
 import { DateUtils } from 'react-day-picker';
 import DayPickerInput from "react-day-picker/DayPickerInput";
 import "react-day-picker/lib/style.css";
 import dateFnsFormat from 'date-fns/format';
 import dateFnsParse from 'date-fns/parse';
-const {format} = require('date-fns');
+const mongoose = require('mongoose');
+const { format } = require('date-fns');
 
 
-function parseDate(str, format, locale) {
-    const parsed = dateFnsParse(str, format, new Date(), { locale });
+function parseDate(str, format) {
+    const parsed = dateFnsParse(str, format, new Date());
     if (DateUtils.isDate(parsed)) {
         return parsed;
     }
     return undefined;
 }
 
-function formatDate(date, format, locale) {
-    
-    return dateFnsFormat(date, format, { locale });
+function formatDate(date, format) {
+
+    return dateFnsFormat(date, format);
 }
 
 export default function NewLesson({ times }) {
     const { data } = useQuery(GET_STUDENTS);
+    const [addEvent] = useMutation(ADD_EVENT);
     const students = data?.users || [];
     const [studentId, setStudentId] = useState('');
-    const [time, setTime] = useState('')
+    const [time, setTime] = useState('');
     const [selectedDay, setSelectedDay] = useState(undefined)
+    const [description, setDescription] = useState('');
     const FORMAT = 'MM/dd/yyyy';
 
     const dayChange = (day) => {
         format(day, 'MM.dd.yyyy');
         setSelectedDay(day)
     }
+    
+    const handleForm = async (e) => {
+        e.preventDefault();
+        // check for for errors`
+        
+        // make sure values are filled in and valid
 
-    console.log('selectedDay', selectedDay)
+        let date = selectedDay.toString()
+        
+        let _id = mongoose.Types.ObjectId(studentId);
 
 
-    console.log(time);
-    console.log(studentId);
+        const buildInput = {
+            student: _id,
+            date: date,
+            description: description,
+
+        };
+
+        // if the input is valid, send it to server
+        try {
+            await addEvent({ variables: {input: buildInput}});
+            alert('lesson added')
+            
+        } catch (err) {
+            console.log(err);
+        }
+    };
+    
+
     return (
 
         <Container>
@@ -49,9 +77,9 @@ export default function NewLesson({ times }) {
                     <h3>Schedule a Lesson</h3>
                 </Card.Header>
                 <Card.Body>
-                    <Form>
+                    <Form onSubmit={handleForm}>
                         <Form.Group className='mb-3'>
-                            <Form.Label for="student-scheduleLesson" className='mb-2'>Select A Student: </Form.Label><br />
+                            <Form.Label className='mb-2'>Select A Student: </Form.Label><br />
                             <Form.Control
                                 as="select"
                                 name='selectStudent'
@@ -74,7 +102,7 @@ export default function NewLesson({ times }) {
                                 format={FORMAT}
                                 parseDate={parseDate}
                             />
-                        
+
                             {/* {selectedDay ? (
                                 <p>You clicked {selectedDay.toLocaleDateString()}</p>
                             ) : (
@@ -82,7 +110,7 @@ export default function NewLesson({ times }) {
                             )} */}
                         </Form.Group>
                         <Form.Group className='mb-3'>
-                            <Form.Label for="time-scheduleLesson" className='mb-2'>Select A Time: </Form.Label>
+                            <Form.Label className='mb-2'>Select A Time: </Form.Label>
                             <Form.Control
                                 as="select"
                                 name='selectTime'
@@ -95,7 +123,15 @@ export default function NewLesson({ times }) {
                                 ))}
                             </Form.Control>
                         </Form.Group>
-
+                        <Form.Group>
+                            <Form.Control
+                                as="textarea"
+                                name="description"
+                                value={description}
+                                onChange={(e) => setDescription(e.target.value)}
+                                style={{ height: '100px' }}
+                            />
+                        </Form.Group>
                         <Button
                             as='input'
                             className='my-2'

@@ -25,14 +25,10 @@ type User {
 
   type Event {
     _id: ID
-    year: Int
-    month: Int
-    day: Int
-    hour: Int
-    summary: String
+    student: ID
+    time: String
+    date: String
     description: String
-    calendar_id: String
-    user_id: User
   }
 
   input UpdateUserInput {
@@ -42,14 +38,9 @@ type User {
 }
 
   input AddEventInput {
-    _id: ID
-    year: Int
-    month: Int
-    day: Int
-    hour: Int
-    summary: String
+    student: ID
+    date: String
     description: String
-    calendar_id: String 
   }
 
   type Query {
