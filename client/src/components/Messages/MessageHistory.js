@@ -16,7 +16,7 @@ export default function MessageHistory({ studentId, setStudentId }) {
     variables: { _id: studentId },
   });
   const student = data?.user.messages || [];
-  useEffect(scrollToBottom, [student]);
+  useEffect(scrollToBottom, [student.length]);
 
     return (
         <Card>

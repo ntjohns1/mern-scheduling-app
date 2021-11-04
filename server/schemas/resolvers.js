@@ -73,17 +73,20 @@ const resolvers = {
       return { token, user };
     },
     addEvent: async (parent, { input }, context) => {
-      if (context.user) {
-        const event = await Event.create({ ...input, ['user_id']: context.user._id });
-
+      // if (context.user) {
+        const event = await Event.create({ ...input });
+        await User.findOneAndUpdate(
+          { _id: event.student },
+          { $addToSet: { events: event._id } }
+        );
         await User.findOneAndUpdate(
           { _id: context.user._id },
           { $addToSet: { events: event._id } }
         );
 
         return event;
-      }
-      throw new AuthenticationError('You need to be logged in!');
+      // }
+      // throw new AuthenticationError('You need to be logged in!');
     },
     addMessage: async (parent, { _id, messageText }, context) => {
       if (context.user) {

@@ -4,7 +4,7 @@ import { Button } from 'react-bootstrap';
 import { DELETE_USER } from '../../utils/mutations';
 
 export default function DeletUserBtn({ formState }) {
-    const [displayError, setDisplayError] = useState(null);
+    const [setDisplayError] = useState(null);
     const [deleteUser] = useMutation(DELETE_USER);
     const handleDelete = async (e) => {
         e.preventDefault();
