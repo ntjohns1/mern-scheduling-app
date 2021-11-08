@@ -34,3 +34,15 @@ query {
     }
   }
 `;
+
+export const EVENTS_BY_DATE = gql `
+query($dayRef: String) {
+  eventsByDate(dayRef: $dayRef) {
+    student
+  	time
+  	dayRef
+  }
+}
+`;
+
+
