@@ -26,8 +26,9 @@ type User {
   type Event {
     _id: ID
     student: ID
-    time: String
     date: String
+    dayRef: String
+    time: String
     description: String
   }
 
@@ -40,6 +41,8 @@ type User {
   input AddEventInput {
     student: ID
     date: String
+    dayRef: String
+    time: String
     description: String
   }
 
@@ -47,6 +50,7 @@ type User {
     users: [User]
     user(_id: ID!): User
     events(username: String): [Event]
+    eventsByDate(dayRef: String): [Event]
     event(eventId: ID!): Event
     me: User
   }

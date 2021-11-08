@@ -14,6 +14,10 @@ const resolvers = {
       const params = username ? { username } : {};
       return Event.find(params).sort({ createdAt: -1 });
     },
+    eventsByDate: async (parent, { dayRef }) => {
+      const params = dayRef ? { dayRef } : {};
+      return Event.find(params);
+    },
     event: async (parent, { eventId }) => {
       return Event.findOne({ _id: eventId });
     },

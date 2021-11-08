@@ -46,15 +46,17 @@ export default function NewLesson({ times }) {
         
         // make sure values are filled in and valid
 
-        let date = selectedDay.toString().slice(0, 15);
+        let dayRef = selectedDay.toString().slice(0, 15);
 
-        let timeStamp = `${date} ${time} GMT-0400 (Eastern Daylight Time)`;
+        let timeStamp = `${dayRef} ${time} GMT-0400 (Eastern Daylight Time)`;
         
         let student = mongoose.Types.ObjectId(studentId);
 
         const buildInput = {
             student: student,
             date: timeStamp,
+            dayRef: dayRef,
+            time: time,
             description: description,
 
         };

@@ -12,6 +12,14 @@ const eventSchema = new Schema({
         get: (timestamp) => dateFormat(timestamp),
         required: true,
     },
+    dayRef: {
+        type: String,
+        required: false,
+    },
+    time: {
+        type: String,
+        required: false,
+    },
     description: {
         type: String,
         required: false,
