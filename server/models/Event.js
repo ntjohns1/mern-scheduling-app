@@ -2,10 +2,14 @@ const { Schema, model } = require('mongoose');
 const dateFormat = require('../utils/dateFormat');
 // date, content, user
 const eventSchema = new Schema({
-    student: {
+    studentId: {
         type: Schema.Types.ObjectId,
         ref: 'User',
       },
+    studentName: {
+        type: String,
+        required: false,
+    },
     date: {
         type: Date,
         default: Date.now,
