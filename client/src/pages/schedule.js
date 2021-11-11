@@ -2,6 +2,7 @@ import React from 'react';
 import { Container } from "react-bootstrap";
 import "react-day-picker/lib/style.css";
 import NewLesson from '../components/Schedule/NewLesson';
+import ViewSchedule from '../components/Schedule/ViewSchedule';
 const times = [
     {
         label: '10:00am',
@@ -152,6 +153,8 @@ const times = [
 
 
 export default function Schedule() {
+
+      
     return (
         <Container>
             <h3 className='mb-3 text-center'>Welcome to Schedule Management!</h3>

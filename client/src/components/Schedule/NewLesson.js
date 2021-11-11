@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { useQuery, useMutation } from "@apollo/client";
 import { GET_STUDENTS } from '../../utils/queries';
 import { ADD_EVENT } from '../../utils/mutations';
@@ -8,9 +8,9 @@ import DayPickerInput from "react-day-picker/DayPickerInput";
 import "react-day-picker/lib/style.css";
 import dateFnsFormat from 'date-fns/format';
 import dateFnsParse from 'date-fns/parse';
+import ViewSchedule from './ViewSchedule';
 const mongoose = require('mongoose');
 const { format } = require('date-fns');
-
 
 function parseDate(str, format) {
     const parsed = dateFnsParse(str, format, new Date());
@@ -21,7 +21,6 @@ function parseDate(str, format) {
 }
 
 function formatDate(date, format) {
-
     return dateFnsFormat(date, format);
 }
 
@@ -30,6 +29,7 @@ export default function NewLesson({ times }) {
     const [addEvent] = useMutation(ADD_EVENT);
     const students = data?.users || [];
     const [studentId, setStudentId] = useState('');
+    const [studentName, setStudentName] = useState('');
     const [time, setTime] = useState('');
     const [selectedDay, setSelectedDay] = useState(undefined)
     const [description, setDescription] = useState('');
@@ -39,21 +39,38 @@ export default function NewLesson({ times }) {
         format(day, 'MM.dd.yyyy');
         setSelectedDay(day)
     }
-    
+
+    const handleChange = async (e) => {
+        setStudentId(e.target.value)
+    };
+
+    const getNames = (e) => {
+        for (let i = 0; i < students.length; i++) {
+            if (students[i]._id === studentId) {
+                setStudentName(students[i].username);
+            }
+        }
+    }
+
+    useEffect(() => {
+        getNames();
+    }, [studentId]);
+
     const handleForm = async (e) => {
         e.preventDefault();
         // check for for errors`
-        
+
         // make sure values are filled in and valid
 
         let dayRef = selectedDay.toString().slice(0, 15);
 
         let timeStamp = `${dayRef} ${time} GMT-0400 (Eastern Daylight Time)`;
-        
-        let student = mongoose.Types.ObjectId(studentId);
+
+        let studentObjectId = mongoose.Types.ObjectId(studentId);
 
         const buildInput = {
-            student: student,
+            studentId: studentObjectId,
+            studentName: studentName,
             date: timeStamp,
             dayRef: dayRef,
             time: time,
@@ -63,14 +80,14 @@ export default function NewLesson({ times }) {
 
         // if the input is valid, send it to server
         try {
-            await addEvent({ variables: {input: buildInput}});
+            await addEvent({ variables: { input: buildInput } });
             alert('lesson added')
-            
+
         } catch (err) {
             console.log(err);
         }
     };
-    
+
 
     return (
 
@@ -87,7 +104,7 @@ export default function NewLesson({ times }) {
                                 as="select"
                                 name='selectStudent'
                                 value={studentId}
-                                onChange={(e) => setStudentId(e.target.value)}
+                                onChange={handleChange}
                             >
                                 <option value=''> Select a Student </option>
                                 {students.map((option) => (
@@ -139,11 +156,11 @@ export default function NewLesson({ times }) {
                             as='input'
                             className='my-2'
                             type='submit'
-                        // value='addLesson' 
                         />
                     </Form>
                 </Card.Body>
             </Card>
+            <ViewSchedule />
         </Container>
     )
 }

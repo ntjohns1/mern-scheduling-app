@@ -8,13 +8,14 @@ const resolvers = {
       return User.find().populate('events').populate('messages');
     },
     user: async (parent, { _id }) => {
+      console.log(User.findOne({ _id }).populate('events').populate('messages'));
       return User.findOne({ _id }).populate('events').populate('messages');
     },
     events: async (parent, { username }) => {
       const params = username ? { username } : {};
       return Event.find(params).sort({ createdAt: -1 });
     },
-    eventsByDate: async (parent, { dayRef }) => {
+    eventsByDate: async (parent, { dayRef },) => {
       const params = dayRef ? { dayRef } : {};
       return Event.find(params);
     },
@@ -80,7 +81,7 @@ const resolvers = {
       // if (context.user) {
         const event = await Event.create({ ...input });
         await User.findOneAndUpdate(
-          { _id: event.student },
+          { _id: event.studentId },
           { $addToSet: { events: event._id } }
         );
         await User.findOneAndUpdate(
