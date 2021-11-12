@@ -12,6 +12,9 @@ import ViewSchedule from './ViewSchedule';
 const mongoose = require('mongoose');
 const { format } = require('date-fns');
 
+
+
+
 function parseDate(str, format) {
     const parsed = dateFnsParse(str, format, new Date());
     if (DateUtils.isDate(parsed)) {
@@ -31,18 +34,23 @@ export default function NewLesson({ times }) {
     const [studentId, setStudentId] = useState('');
     const [studentName, setStudentName] = useState('');
     const [time, setTime] = useState('');
+    const [schedule, setSchedule] = useState('');
     const [selectedDay, setSelectedDay] = useState(undefined)
     const [description, setDescription] = useState('');
     const FORMAT = 'MM/dd/yyyy';
-
-    const dayChange = (day) => {
+    
+    const dayChange = (day, modifiers, dayPickerInput) => {
         format(day, 'MM.dd.yyyy');
         setSelectedDay(day)
+        const input = dayPickerInput.getInput();
+        setSchedule(input.value);
     }
 
     const handleChange = async (e) => {
         setStudentId(e.target.value)
     };
+
+    
 
     const getNames = (e) => {
         for (let i = 0; i < students.length; i++) {
@@ -54,7 +62,7 @@ export default function NewLesson({ times }) {
 
     useEffect(() => {
         getNames();
-    }, [studentId]);
+    });
 
     const handleForm = async (e) => {
         e.preventDefault();
@@ -62,9 +70,9 @@ export default function NewLesson({ times }) {
 
         // make sure values are filled in and valid
 
-        let dayRef = selectedDay.toString().slice(0, 15);
+        let dateString = selectedDay.toString().slice(0, 15);
 
-        let timeStamp = `${dayRef} ${time} GMT-0400 (Eastern Daylight Time)`;
+        let timeStamp = `${dateString} ${time} GMT-0400 (Eastern Daylight Time)`;
 
         let studentObjectId = mongoose.Types.ObjectId(studentId);
 
@@ -72,7 +80,7 @@ export default function NewLesson({ times }) {
             studentId: studentObjectId,
             studentName: studentName,
             date: timeStamp,
-            dayRef: dayRef,
+            dayRef: schedule,
             time: time,
             description: description,
 
@@ -160,12 +168,8 @@ export default function NewLesson({ times }) {
                     </Form>
                 </Card.Body>
             </Card>
-            <ViewSchedule />
+            <ViewSchedule day={schedule}/>
         </Container>
     )
 }
 
-/*
-    {{#each students as |user|}}
-    <option>'ID, Firstname Last Name'</option>
-    /* {{/each}} */

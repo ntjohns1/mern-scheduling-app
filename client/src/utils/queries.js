@@ -38,6 +38,7 @@ query {
 export const EVENTS_BY_DATE = gql `
 query($dayRef: String) {
   eventsByDate(dayRef: $dayRef) {
+    _id
     studentId
     studentName
   	time
