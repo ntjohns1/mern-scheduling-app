@@ -23,6 +23,15 @@ type User {
     createdAt: String
   }
 
+  type Email {
+    _id: ID
+    email: String
+    senderName: String
+    subject: String
+    text: String
+  }
+
+
   type Event {
     _id: ID
     studentId: ID
@@ -48,6 +57,14 @@ type User {
     description: String
   }
 
+  input sendEmailInput {
+    _id: ID
+    email: String
+    senderName: String
+    subject: String
+    text: String
+  }
+
   type Query {
     users: [User]
     user(_id: ID!): User
@@ -68,6 +85,7 @@ type User {
     login(email: String!, password: String!): Auth
     addEvent(input: AddEventInput): Event
     addMessage(_id: ID!, messageText: String): Message
+    sendEmail(input: sendEmailInput): Email
     removeEvent(eventId: ID!): Event
     removeMessage(eventId: ID!, messageId: ID!): Event
   }

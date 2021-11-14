@@ -9,6 +9,7 @@ import "react-day-picker/lib/style.css";
 import dateFnsFormat from 'date-fns/format';
 import dateFnsParse from 'date-fns/parse';
 import ViewSchedule from './ViewSchedule';
+
 const mongoose = require('mongoose');
 const { format } = require('date-fns');
 
@@ -31,13 +32,16 @@ export default function NewLesson({ times }) {
     const [studentId, setStudentId] = useState('');
     const [studentName, setStudentName] = useState('');
     const [time, setTime] = useState('');
+    const [schedule, setSchedule] = useState('');
     const [selectedDay, setSelectedDay] = useState(undefined)
     const [description, setDescription] = useState('');
     const FORMAT = 'MM/dd/yyyy';
-
-    const dayChange = (day) => {
+    
+    const dayChange = (day, modifiers, dayPickerInput) => {
         format(day, 'MM.dd.yyyy');
         setSelectedDay(day)
+        const input = dayPickerInput.getInput();
+        setSchedule(input.value);
     }
 
     const handleChange = async (e) => {
@@ -54,7 +58,7 @@ export default function NewLesson({ times }) {
 
     useEffect(() => {
         getNames();
-    }, [studentId]);
+    });
 
     const handleForm = async (e) => {
         e.preventDefault();
@@ -62,9 +66,9 @@ export default function NewLesson({ times }) {
 
         // make sure values are filled in and valid
 
-        let dayRef = selectedDay.toString().slice(0, 15);
+        let dateString = selectedDay.toString().slice(0, 15);
 
-        let timeStamp = `${dayRef} ${time} GMT-0400 (Eastern Daylight Time)`;
+        let timeStamp = `${dateString} ${time} GMT-0400 (Eastern Daylight Time)`;
 
         let studentObjectId = mongoose.Types.ObjectId(studentId);
 
@@ -72,7 +76,7 @@ export default function NewLesson({ times }) {
             studentId: studentObjectId,
             studentName: studentName,
             date: timeStamp,
-            dayRef: dayRef,
+            dayRef: schedule,
             time: time,
             description: description,
 
@@ -81,13 +85,11 @@ export default function NewLesson({ times }) {
         // if the input is valid, send it to server
         try {
             await addEvent({ variables: { input: buildInput } });
-            alert('lesson added')
-
+            alert('lesson added');
         } catch (err) {
             console.log(err);
         }
     };
-
 
     return (
 
@@ -160,12 +162,8 @@ export default function NewLesson({ times }) {
                     </Form>
                 </Card.Body>
             </Card>
-            <ViewSchedule />
+            <ViewSchedule day={schedule}/>
         </Container>
     )
 }
 
-/*
-    {{#each students as |user|}}
-    <option>'ID, Firstname Last Name'</option>
-    /* {{/each}} */

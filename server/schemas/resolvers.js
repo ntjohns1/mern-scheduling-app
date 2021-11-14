@@ -1,6 +1,8 @@
 const { AuthenticationError } = require('apollo-server-express');
-const { User, Event, Message } = require('../models');
+const { User, Event, Message, Email } = require('../models');
 const { signToken } = require('../utils/auth');
+const mailer = require('../utils/mailer');
+
 
 const resolvers = {
   Query: {
@@ -110,6 +112,26 @@ const resolvers = {
         return message;
       }
       throw new AuthenticationError('You need to be logged in!');
+    },
+    sendEmail: async (parent, { input }, context) => {
+      // if (context.user) {
+  
+        const mail = await Email.create({ ...input });
+  
+        const email = input.email
+        const senderName = input.senderName
+        const subject = input.subject
+        const text = input.text
+        
+        await mailer(email, senderName, subject, text).then(() => {
+          console.log(`Sent the message "${text}" from <${senderName}> ${email}.`);
+        }).catch((error) => {
+          console.log(`Failed to send the message "${text}" from <${senderName}> ${email} with the error ${error && error.message}`);
+        });
+
+        return mail;
+      // }
+      // throw new AuthenticationError('You need to be logged in!');
     },
     removeEvent: async (parent, { eventId }, context) => {
       if (context.user) {
