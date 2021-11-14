@@ -9,11 +9,9 @@ import "react-day-picker/lib/style.css";
 import dateFnsFormat from 'date-fns/format';
 import dateFnsParse from 'date-fns/parse';
 import ViewSchedule from './ViewSchedule';
+
 const mongoose = require('mongoose');
 const { format } = require('date-fns');
-
-
-
 
 function parseDate(str, format) {
     const parsed = dateFnsParse(str, format, new Date());
@@ -49,8 +47,6 @@ export default function NewLesson({ times }) {
     const handleChange = async (e) => {
         setStudentId(e.target.value)
     };
-
-    
 
     const getNames = (e) => {
         for (let i = 0; i < students.length; i++) {
@@ -89,13 +85,11 @@ export default function NewLesson({ times }) {
         // if the input is valid, send it to server
         try {
             await addEvent({ variables: { input: buildInput } });
-            alert('lesson added')
-
+            alert('lesson added');
         } catch (err) {
             console.log(err);
         }
     };
-
 
     return (
 

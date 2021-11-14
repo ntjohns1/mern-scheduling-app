@@ -7,6 +7,7 @@ import Auth from '../utils/auth';
 
 export default function Home() {
     const loggedStatus = Auth.loggedIn();
+    console.log(`${process.env.REACT_APP_EMAIL}`);
     return (
         <Container>
             {loggedStatus && (
