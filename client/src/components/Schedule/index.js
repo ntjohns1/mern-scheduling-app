@@ -17,3 +17,9 @@
     // Function triggered by a successful new event mutation to send an Email (possibly a helper function)
     // FE logic to send a reminder email the day before
 
+// Finishing Schedule View (editing & deleting events):
+
+    // delete button component
+    // edit button component
+    // form for editing single lesson
+

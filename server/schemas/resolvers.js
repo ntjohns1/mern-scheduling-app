@@ -1,6 +1,7 @@
 const { AuthenticationError } = require('apollo-server-express');
 const { User, Event, Message, Email } = require('../models');
 const { signToken } = require('../utils/auth');
+const mongoose = require('mongoose')
 const mailer = require('../utils/mailer');
 
 
@@ -10,7 +11,6 @@ const resolvers = {
       return User.find().populate('events').populate('messages');
     },
     user: async (parent, { _id }) => {
-      console.log(User.findOne({ _id }).populate('events').populate('messages'));
       return User.findOne({ _id }).populate('events').populate('messages');
     },
     events: async (parent, { username }) => {
@@ -21,8 +21,8 @@ const resolvers = {
       const params = dayRef ? { dayRef } : {};
       return Event.find(params);
     },
-    event: async (parent, { eventId }) => {
-      return Event.findOne({ _id: eventId });
+    event: async (parent, { _id }) => {
+      return Event.findOne({ _id: _id });
     },
     me: async (parent, args, context) => {
       if (context.user) {
@@ -81,7 +81,6 @@ const resolvers = {
     },
     addEvent: async (parent, { input }, context) => {
       // if (context.user) {
-        console.log(context.user);
         const event = await Event.create({ ...input });
         await User.findOneAndUpdate(
           { _id: event.studentId },
@@ -135,25 +134,41 @@ const resolvers = {
       // }
       // throw new AuthenticationError('You need to be logged in!');
     },
-    removeEvent: async (parent, { eventId }, context) => {
-      if (context.user) {
+    deleteEvent: async (parent, { _id, userId }, context) => {
+      // if (context.user) {
+        // userId = mongoose.Types.ObjectId('618d324f6de85e6d127da089');
+        
         const event = await Event.findOneAndDelete({
-          _id: eventId
+          _id: _id
         });
 
         await User.findOneAndUpdate(
+          { _id: userId },
+          { $pull: { events: _id } }
+        );
+
+        await User.findOneAndUpdate(
           { _id: context.user._id },
-          { $pull: { events: event._id } }
+          { $pull: { events: _id } }
         );
 
         return event;
-      }
-      throw new AuthenticationError('You need to be logged in!');
+      // }
+      // throw new AuthenticationError('You need to be logged in!');
     },
-    removeMessage: async (parent, { eventId, messageId }, context) => {
+    updateEvent: async (parent, args) => {
+      const { _id } = args.input;
+       
+      const event = await Event.findOneAndUpdate(
+        { _id: _id },
+        { $set: {...args.input}},
+        { new: true });
+      return event;
+    },
+    removeMessage: async (parent, { userId, messageId }, context) => {
       if (context.user) {
-        return Event.findOneAndUpdate(
-          { _id: eventId },
+        return User.findOneAndUpdate(
+          { _id: userId },
           {
             $pull: {
               messages: {

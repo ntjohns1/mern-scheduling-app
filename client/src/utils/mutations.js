@@ -39,7 +39,8 @@ mutation(
     ) {
     _id
   }
- }`;
+ }
+ `;
 
 export const DELETE_USER = gql`
 mutation(
@@ -48,7 +49,8 @@ mutation(
   deleteUser(_id: $_id) {
     _id
   }
-}`;
+}
+`;
 
 // Event Mutations
 
@@ -57,7 +59,8 @@ mutation($input: AddEventInput) {
   addEvent(input:$input) {
     date
   }
-}`;
+}
+`;
 
 export const ADD_EVENT_AND_EMAIL = gql`
 mutation($AddEventInput: AddEventInput, $SendEmailInput: SendEmailInput) {
@@ -70,8 +73,29 @@ mutation($AddEventInput: AddEventInput, $SendEmailInput: SendEmailInput) {
     subject
     text
   }
-}`;
+}
+`;
 
+export const UPDATE_EVENT = gql`
+mutation($input: AddEventInput) {
+  updateEvent(input: $input) {
+    _id
+    studentId
+    studentName
+    date
+    dayRef
+    time
+    description
+  }
+}
+`;
+
+export const DELETE_EVENT = gql`
+mutation($_id: ID!) {
+  deleteEvent(_id: $_id) {
+    _id
+  }
+}`;
 
 
 // Message Mutations
