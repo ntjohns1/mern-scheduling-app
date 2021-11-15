@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { useQuery } from '@apollo/client';
 import { EVENTS_BY_DATE } from '../../utils/queries';
-import { ListGroup, Container, Button } from 'react-bootstrap';
+import { ListGroup, Container } from 'react-bootstrap';
 import DeleteButton from './DeleteButton';
 import EditButton from './EditButton';
 
@@ -40,7 +40,7 @@ export default function ViewSchedule({ day }) {
             <ListGroup.Item className='col-2' style={{ backgroundColor: '#B0B0B0' }} id={lesson._id}>{lesson.studentName}</ListGroup.Item>
             <ListGroup.Item className='col-6' style={{ backgroundColor: '#B0B0B0' }} id={lesson.studentId}>{lesson.description}</ListGroup.Item>
             <ListGroup.Item className='col-1' style={{ backgroundColor: '#B0B0B0' }} id={lesson.studentId}><EditButton _id={lesson._id}/></ListGroup.Item>
-            <ListGroup.Item className='col-1' style={{ backgroundColor: '#B0B0B0' }} id={lesson.studentId}><DeleteButton _id={lesson._id}/></ListGroup.Item>
+            <ListGroup.Item className='col-1' style={{ backgroundColor: '#B0B0B0' }} id={lesson.studentId}><DeleteButton _id={lesson._id} day={day}/></ListGroup.Item>
           </ListGroup>
         ))}
       </Container>

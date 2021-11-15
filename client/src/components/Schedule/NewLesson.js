@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { useQuery, useMutation } from "@apollo/client";
-import { GET_STUDENTS } from '../../utils/queries';
+import { EVENTS_BY_DATE, GET_STUDENTS } from '../../utils/queries';
 import { ADD_EVENT_AND_EMAIL } from '../../utils/mutations';
 import { Card, Container, Form, Button } from "react-bootstrap";
 import { DateUtils } from 'react-day-picker';
@@ -27,17 +27,22 @@ function formatDate(date, format) {
 
 export default function NewLesson({ times }) {
     const { data } = useQuery(GET_STUDENTS);
-    const [addEvent] = useMutation(ADD_EVENT_AND_EMAIL);
+    const [addEvent] = useMutation(ADD_EVENT_AND_EMAIL, {
+        refetchQueries: [
+            EVENTS_BY_DATE, // DocumentNode object parsed with gql
+            'eventsByDate' // Query name
+        ],
+    });
     const students = data?.users || [];
     const [studentId, setStudentId] = useState('');
     const [studentName, setStudentName] = useState('');
     const [studentEmail, setStudentEmail] = useState('');
-    const [time, setTime] = useState('');
+    const [time, setTime] = useState({ value: '' });
     const [schedule, setSchedule] = useState('');
     const [selectedDay, setSelectedDay] = useState(undefined)
     const [description, setDescription] = useState('');
     const FORMAT = 'MM/dd/yyyy';
-    
+
     const dayChange = (day, modifiers, dayPickerInput) => {
         format(day, 'MM.dd.yyyy');
         setSelectedDay(day)
@@ -99,6 +104,10 @@ export default function NewLesson({ times }) {
         } catch (err) {
             console.log(err);
         }
+        setStudentId('');
+        setStudentName('');
+        setStudentEmail('');
+        setDescription('');
     };
 
     return (
@@ -150,6 +159,7 @@ export default function NewLesson({ times }) {
                                 onChange={(e) => setTime(e.target.value)}
 
                             >
+                                <option value=''> Select a Time </option>
                                 {times.map((option) => (
                                     <option value={option.value} key={option.value}>{option.label}</option>
                                 ))}
@@ -172,7 +182,7 @@ export default function NewLesson({ times }) {
                     </Form>
                 </Card.Body>
             </Card>
-            <ViewSchedule day={schedule}/>
+            <ViewSchedule day={schedule} />
         </Container>
     )
 }
