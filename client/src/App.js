@@ -13,6 +13,7 @@ import Login from './pages/login';
 import Signup from './pages/signup';
 import Portal from './pages/portal';
 import Students from './pages/students';
+import SingleLesson from './components/Schedule/SingleLesson';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import { library } from '@fortawesome/fontawesome-svg-core'
 import { fas } from '@fortawesome/free-solid-svg-icons'
@@ -64,6 +65,9 @@ export default function App() {
 						</Route>
 						<Route exact path='/schedule'>
 							<Schedule />
+						</Route>
+						<Route exact path='/:id'>
+							<SingleLesson />
 						</Route>
 						<Route exact path='/calendar'>
 							<Cal />

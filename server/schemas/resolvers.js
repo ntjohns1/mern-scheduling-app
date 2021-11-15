@@ -21,8 +21,8 @@ const resolvers = {
       const params = dayRef ? { dayRef } : {};
       return Event.find(params);
     },
-    event: async (parent, { eventId }) => {
-      return Event.findOne({ _id: eventId });
+    event: async (parent, { _id }) => {
+      return Event.findOne({ _id: _id });
     },
     me: async (parent, args, context) => {
       if (context.user) {

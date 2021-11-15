@@ -1,5 +1,7 @@
 import { gql } from '@apollo/client';
 
+// User Queries
+
 export const GET_ME = gql`
 query {
     me {
@@ -25,17 +27,19 @@ export const GET_STUDENT = gql`
   }
 `;
 
-export const GET_STUDENTS = gql `
+export const GET_STUDENTS = gql`
 query {
-    users {
-      _id
-      username
-      email
-    }
+  users {
+    _id
+    username
+    email
   }
+}
 `;
 
-export const EVENTS_BY_DATE = gql `
+// Event Queries
+
+export const EVENTS_BY_DATE = gql`
 query($dayRef: String) {
   eventsByDate(dayRef: $dayRef) {
     _id
@@ -48,4 +52,17 @@ query($dayRef: String) {
 }
 `;
 
+export const GET_EVENT = gql`
+query event($_id: ID!) {
+  event(_id: $_id) {
+    _id
+    studentId
+    studentName
+    date
+    dayRef
+    time
+    description
+  }
+}
+`;
 
