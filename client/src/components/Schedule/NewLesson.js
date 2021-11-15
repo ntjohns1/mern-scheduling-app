@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { useQuery, useMutation } from "@apollo/client";
 import { GET_STUDENTS } from '../../utils/queries';
-import { ADD_EVENT } from '../../utils/mutations';
+import { ADD_EVENT_AND_EMAIL } from '../../utils/mutations';
 import { Card, Container, Form, Button } from "react-bootstrap";
 import { DateUtils } from 'react-day-picker';
 import DayPickerInput from "react-day-picker/DayPickerInput";
@@ -27,10 +27,11 @@ function formatDate(date, format) {
 
 export default function NewLesson({ times }) {
     const { data } = useQuery(GET_STUDENTS);
-    const [addEvent] = useMutation(ADD_EVENT);
+    const [addEvent] = useMutation(ADD_EVENT_AND_EMAIL);
     const students = data?.users || [];
     const [studentId, setStudentId] = useState('');
     const [studentName, setStudentName] = useState('');
+    const [studentEmail, setStudentEmail] = useState('');
     const [time, setTime] = useState('');
     const [schedule, setSchedule] = useState('');
     const [selectedDay, setSelectedDay] = useState(undefined)
@@ -52,6 +53,8 @@ export default function NewLesson({ times }) {
         for (let i = 0; i < students.length; i++) {
             if (students[i]._id === studentId) {
                 setStudentName(students[i].username);
+                setStudentEmail(students[i].email);
+                console.log(studentEmail);
             }
         }
     }
@@ -66,25 +69,33 @@ export default function NewLesson({ times }) {
 
         // make sure values are filled in and valid
 
+        let email = studentEmail;
+
         let dateString = selectedDay.toString().slice(0, 15);
 
         let timeStamp = `${dateString} ${time} GMT-0400 (Eastern Daylight Time)`;
 
         let studentObjectId = mongoose.Types.ObjectId(studentId);
 
-        const buildInput = {
+        const eventInput = {
             studentId: studentObjectId,
             studentName: studentName,
             date: timeStamp,
             dayRef: schedule,
             time: time,
             description: description,
-
         };
+        const sendEmailInput = {
+            email: 'nelsontjohns@gmail.com',
+            senderName: 'Nelson',
+            toEmail: email,
+            subject: `New lesson on ${schedule}`,
+            text: `This is an autmated reminder that you have a new lesson scheduled with Nelson Johns on ${schedule} at ${time}`
+        }
 
         // if the input is valid, send it to server
         try {
-            await addEvent({ variables: { input: buildInput } });
+            await addEvent({ variables: { AddEventInput: eventInput, SendEmailInput: sendEmailInput } });
             alert('lesson added');
         } catch (err) {
             console.log(err);

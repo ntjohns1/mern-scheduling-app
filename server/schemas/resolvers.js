@@ -81,6 +81,7 @@ const resolvers = {
     },
     addEvent: async (parent, { input }, context) => {
       // if (context.user) {
+        console.log(context.user);
         const event = await Event.create({ ...input });
         await User.findOneAndUpdate(
           { _id: event.studentId },
@@ -120,10 +121,11 @@ const resolvers = {
   
         const email = input.email
         const senderName = input.senderName
+        const toEmail = input.toEmail
         const subject = input.subject
         const text = input.text
         
-        await mailer(email, senderName, subject, text).then(() => {
+        await mailer(email, senderName, toEmail, subject, text).then(() => {
           console.log(`Sent the message "${text}" from <${senderName}> ${email}.`);
         }).catch((error) => {
           console.log(`Failed to send the message "${text}" from <${senderName}> ${email} with the error ${error && error.message}`);

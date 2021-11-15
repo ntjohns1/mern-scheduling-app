@@ -59,6 +59,19 @@ mutation($input: AddEventInput) {
   }
 }`;
 
+export const ADD_EVENT_AND_EMAIL = gql`
+mutation($AddEventInput: AddEventInput, $SendEmailInput: SendEmailInput) {
+  addEvent(input:$AddEventInput) {
+    date
+  }
+  sendEmail(input:$SendEmailInput) {
+    email
+    senderName
+    subject
+    text
+  }
+}`;
+
 
 
 // Message Mutations
@@ -72,3 +85,18 @@ mutation($_id: ID!, $messageText: String) {
     createdAt
   }
 }`;
+
+// Email Mutation
+
+export const SEND_EMAIL = gql`
+mutation($input: SendEmailInput) {
+  sendEmail(input:$input) {
+    email
+    senderName
+    subject
+    text
+  }
+}`;
+
+
+
