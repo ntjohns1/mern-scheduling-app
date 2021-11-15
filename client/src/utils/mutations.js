@@ -72,6 +72,12 @@ mutation($AddEventInput: AddEventInput, $SendEmailInput: SendEmailInput) {
   }
 }`;
 
+export const DELETE_EVENT = gql`
+mutation($_id: ID!) {
+  deleteEvent(_id: $_id) {
+    _id
+  }
+}`;
 
 
 // Message Mutations

@@ -87,10 +87,11 @@ type User {
     deleteUser(_id: ID!): User
     login(email: String!, password: String!): Auth
     addEvent(input: AddEventInput): Event
+    updateEvent(input: AddEventInput): Event
     addMessage(_id: ID!, messageText: String): Message
     sendEmail(input: SendEmailInput): Email
-    removeEvent(eventId: ID!): Event
-    removeMessage(eventId: ID!, messageId: ID!): Event
+    deleteEvent(_id: ID!, userId: ID): Event
+    removeMessage(userId: ID!, messageId: ID!): User
   }
 `;
 
