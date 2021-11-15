@@ -42,43 +42,43 @@ const client = new ApolloClient({
 	// Set up our client to execute the `authLink` middleware prior to making the request to our GraphQL API
 	link: authLink.concat(httpLink),
 	cache: new InMemoryCache(),
-	clientState: { defaults: {}, resolvers: {} } 
+	clientState: { defaults: {}, resolvers: {} }
 });
 
 
 
 export default function App() {
 	return (
-		<ApolloProvider client={client}>
-			<Router>
-				<Nav />
-				<Switch>
-					<Route exact path='/'>
-						<Home />
-					</Route>
-					<Route exact path='/portal'>
-						<Portal />
-					</Route>
-					<Route exact path='/students'>
-						<Students />
-					</Route>
-					<Route exact path='/schedule'>
-						<Schedule />
-					</Route>
-					<Route exact path='/calendar'>
-						<Cal />
-					</Route>
-					<Route exact path='/messages'>
-						<Messages />
-					</Route>
-					<Route exact path='/login'>
-						<Login />
-					</Route>
-					<Route exact path='/signup'>
-						<Signup />
-					</Route>
-				</Switch>
-			</Router>
-		</ApolloProvider>
+			<ApolloProvider client={client}>
+				<Router>
+					<Nav />
+					<Switch>
+						<Route exact path='/'>
+							<Home />
+						</Route>
+						<Route exact path='/portal'>
+							<Portal />
+						</Route>
+						<Route exact path='/students'>
+							<Students />
+						</Route>
+						<Route exact path='/schedule'>
+							<Schedule />
+						</Route>
+						<Route exact path='/calendar'>
+							<Cal />
+						</Route>
+						<Route exact path='/messages'>
+							<Messages />
+						</Route>
+						<Route exact path='/login'>
+							<Login />
+						</Route>
+						<Route exact path='/signup'>
+							<Signup />
+						</Route>
+					</Switch>
+				</Router>
+			</ApolloProvider>
 	);
 };

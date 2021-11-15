@@ -11,7 +11,6 @@ const resolvers = {
       return User.find().populate('events').populate('messages');
     },
     user: async (parent, { _id }) => {
-      console.log(User.findOne({ _id }).populate('events').populate('messages'));
       return User.findOne({ _id }).populate('events').populate('messages');
     },
     events: async (parent, { username }) => {
@@ -82,7 +81,6 @@ const resolvers = {
     },
     addEvent: async (parent, { input }, context) => {
       // if (context.user) {
-        console.log(context.user);
         const event = await Event.create({ ...input });
         await User.findOneAndUpdate(
           { _id: event.studentId },

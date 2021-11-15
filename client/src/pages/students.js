@@ -27,7 +27,6 @@ export default function Students() {
     // submit form
     const handleFormSubmit = async (event) => {
         event.preventDefault();
-        console.log(formState);
         const {
             username,
             email,

@@ -54,7 +54,6 @@ export default function NewLesson({ times }) {
             if (students[i]._id === studentId) {
                 setStudentName(students[i].username);
                 setStudentEmail(students[i].email);
-                console.log(studentEmail);
             }
         }
     }
