@@ -27,6 +27,7 @@ type User {
     _id: ID
     email: String
     senderName: String
+    toEmail: String
     subject: String
     text: String
   }
@@ -49,6 +50,7 @@ type User {
 }
 
   input AddEventInput {
+    _id: ID
     studentId: ID
     studentName: String
     date: String
@@ -57,10 +59,11 @@ type User {
     description: String
   }
 
-  input sendEmailInput {
+  input SendEmailInput {
     _id: ID
     email: String
     senderName: String
+    toEmail: String
     subject: String
     text: String
   }
@@ -85,7 +88,7 @@ type User {
     login(email: String!, password: String!): Auth
     addEvent(input: AddEventInput): Event
     addMessage(_id: ID!, messageText: String): Message
-    sendEmail(input: sendEmailInput): Email
+    sendEmail(input: SendEmailInput): Email
     removeEvent(eventId: ID!): Event
     removeMessage(eventId: ID!, messageId: ID!): Event
   }
