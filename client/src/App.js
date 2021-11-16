@@ -66,7 +66,7 @@ export default function App() {
 						<Route exact path='/schedule'>
 							<Schedule />
 						</Route>
-						<Route exact path='/:id'>
+						<Route exact path='/lesson/:id'>
 							<SingleLesson />
 						</Route>
 						<Route exact path='/calendar'>

@@ -5,9 +5,9 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faEdit } from '@fortawesome/free-solid-svg-icons'
 
 
-export default function EditButton({ _id }) {
+export default function EditButton({ id }) {
     return (
-        <Link to={`/${_id}`}>
+        <Link to={`/lesson/${id}`}>
         <Button>
         <FontAwesomeIcon icon={faEdit} />
         </Button>
