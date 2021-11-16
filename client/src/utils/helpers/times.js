@@ -1,5 +1,4 @@
-export default function times() {
-    times = [
+const times = [
     {
         label: '10:00am',
         value: '10:00am',
@@ -79,7 +78,7 @@ export default function times() {
     {
         label: '2:45pm',
         value: '14:45pm',
-    },    
+    },
     {
         label: '3:00pm',
         value: '15:00pm',
@@ -95,7 +94,7 @@ export default function times() {
     {
         label: '3:45pm',
         value: '15:45pm',
-    },         
+    },
     {
         label: '4:00pm',
         value: '16:00pm',
@@ -111,8 +110,8 @@ export default function times() {
     {
         label: '4:45pm',
         value: '16:45pm',
-    },  
-    {  
+    },
+    {
         label: '5:00pm',
         value: '17:00pm',
     },
@@ -127,7 +126,7 @@ export default function times() {
     {
         label: '5:45pm',
         value: '17:45pm',
-    },    
+    },
     {
         label: '6:00pm',
         value: '18:00pm',
@@ -143,7 +142,7 @@ export default function times() {
     {
         label: '6:45pm',
         value: '18:45pm',
-    },    
+    },
 ];
-    return times
-};
+
+export default times

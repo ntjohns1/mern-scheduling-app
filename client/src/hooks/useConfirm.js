@@ -1,6 +1,6 @@
 import { useContext } from 'react';
-import ConfirmContext from '../utils/ConfirmContext';
-import {HIDE_CONFIRM, SHOW_CONFIRM} from "../utils/ConfirmReducer";
+import ConfirmContext from '../utils/context/ConfirmContext';
+import {HIDE_CONFIRM, SHOW_CONFIRM} from "../utils/context/ConfirmReducer";
 
 let resolveCallback;
 function useConfirm() {
