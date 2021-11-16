@@ -39,8 +39,8 @@ export default function ViewSchedule({ day }) {
             <ListGroup.Item className='col-2' style={{ backgroundColor: '#B0B0B0', textDecoration: 'underline', cursor: 'pointer' }} id={lesson.studentId}>{lesson.time}</ListGroup.Item>
             <ListGroup.Item className='col-2' style={{ backgroundColor: '#B0B0B0' }} id={lesson._id}>{lesson.studentName}</ListGroup.Item>
             <ListGroup.Item className='col-6' style={{ backgroundColor: '#B0B0B0' }} id={lesson.studentId}>{lesson.description}</ListGroup.Item>
-            <ListGroup.Item className='col-1' style={{ backgroundColor: '#B0B0B0' }} id={lesson.studentId}><EditButton _id={lesson._id}/></ListGroup.Item>
-            <ListGroup.Item className='col-1' style={{ backgroundColor: '#B0B0B0' }} id={lesson.studentId}><DeleteButton _id={lesson._id} day={day}/></ListGroup.Item>
+            <ListGroup.Item className='col-1' style={{ backgroundColor: '#B0B0B0' }} id={lesson.studentId}><EditButton id={lesson._id}/></ListGroup.Item>
+            <ListGroup.Item className='col-1' style={{ backgroundColor: '#B0B0B0' }} id={lesson.studentId}><DeleteButton id={lesson._id} day={day}/></ListGroup.Item>
           </ListGroup>
         ))}
       </Container>
