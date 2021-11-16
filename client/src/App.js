@@ -20,6 +20,7 @@ import { fas } from '@fortawesome/free-solid-svg-icons'
 import Schedule from './pages/schedule';
 import Messages from './pages/messages'
 import Cal from './pages/calendar';
+import SetNotifications from './components/Schedule/SetNotifications';
 
 library.add(fas);
 
@@ -65,6 +66,9 @@ export default function App() {
 						</Route>
 						<Route exact path='/schedule'>
 							<Schedule />
+						</Route>
+						<Route exact path='/notifications'>
+							<SetNotifications />
 						</Route>
 						<Route exact path='/lesson/:id'>
 							<SingleLesson />

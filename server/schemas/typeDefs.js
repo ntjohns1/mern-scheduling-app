@@ -7,6 +7,7 @@ type User {
   email: String
   password: String
   isTeacher: Boolean
+  autoNotify: Boolean
   events: [Event]
   messages: [Message]
 }
@@ -83,6 +84,7 @@ type User {
       _id: ID
       username: String
       email: String
+      autoNotify: Boolean
     ): User
     deleteUser(_id: ID!): User
     login(email: String!, password: String!): Auth

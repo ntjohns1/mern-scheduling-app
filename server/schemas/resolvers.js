@@ -38,13 +38,14 @@ const resolvers = {
       const token = signToken(user);
       return { token, user };
     },
-    updateUser: async (parent, { _id, username, email }) => {
+    updateUser: async (parent, { _id, username, email, autoNotify }) => {
       const user = await User.findOneAndUpdate(
         { _id: _id },
         {
           $set: {
             username: username,
-            email: email
+            email: email,
+            autoNotify: autoNotify
           }
         },
         { new: true });

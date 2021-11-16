@@ -9,7 +9,6 @@ import "react-day-picker/lib/style.css";
 import dateFnsFormat from 'date-fns/format';
 import dateFnsParse from 'date-fns/parse';
 import ViewSchedule from './ViewSchedule';
-const dateFormat = require('../../utils/dateFormat');
 const { format } = require('date-fns');
 
 
@@ -22,12 +21,10 @@ export default function SetNotifications() {
         pollInterval: 86400000,
     });
     const lesson = data?.eventsByDate
-    console.log(typeof(lesson));
     // for all returned users, send a reminder email.
     const [sendEmail] = useMutation(SEND_EMAIL);
-    
 
-
+    console.log(lesson);
 
     // Set up Boolean property on user called autoNotify
     // now only send emails to autoNotify: true users 
