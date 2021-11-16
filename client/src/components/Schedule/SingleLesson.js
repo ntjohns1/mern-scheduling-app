@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { useQuery, useMutation } from "@apollo/client";
 import { useParams } from 'react-router-dom';
 import { GET_EVENT } from '../../utils/queries';
@@ -14,16 +14,18 @@ export default function SingleLesson() {
         // Pass the `_id` URL parameter into query to retrieve this event's data
         variables: { _id: id },
     });
-    const event = data?.event || {};
-    console.log(event);
+    const eventData = data?.event || {};
 
-    const [formState, setFormState] = useState({
-        studentName: event.studentName,
-        date: event.date,
-        dayRef: event.dayRef,
-        time: event.time,
-        description: event.description,
-    });
+    const initialState = {
+        studentName: eventData?.studentName ? eventData.studentName : '',
+        date: eventData?.date ? eventData.date : '',
+        dayRef: eventData?.dayRef ? eventData.dayRef : '',
+        time: eventData?.time ? eventData.time : '',
+        description: eventData?.description ? eventData.description : '',
+    };
+
+
+    const [formState, setFormState] = useState(initialState);
 
     const handleChange = (event) => {
         const { name, value } = event.target;
@@ -52,7 +54,7 @@ export default function SingleLesson() {
         <Container>
             <Card>
                 <Card.Header>
-                    <h3>Update Lesson with {event.studentName} on {event.date}</h3>
+                    <h3>Update Lesson with {eventData.studentName} on {eventData.date}</h3>
                 </Card.Header>
                 <Card.Body>
                     <Form onSubmit={handleUpdate}>

@@ -5,7 +5,7 @@ import App from './App';
 import 'bootstrap/dist/css/bootstrap.min.css';
 // import * as serviceWorkerRegistration from './serviceWorkerRegistration';
 import reportWebVitals from './reportWebVitals';
-import { ConfirmContextProvider } from "./utils/ConfirmContexProvider";
+import { ConfirmContextProvider } from "./utils/context/ConfirmContexProvider";
 import ConfirmModal from './components/ConfirmModal';
 
 ReactDOM.render(

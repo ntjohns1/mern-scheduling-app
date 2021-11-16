@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { useQuery, useMutation } from "@apollo/client";
 import { EVENTS_BY_DATE, GET_STUDENTS } from '../../utils/queries';
 import { ADD_EVENT_AND_EMAIL } from '../../utils/mutations';
+import times from '../../utils/helpers/times';
 import { Card, Container, Form, Button } from "react-bootstrap";
 import { DateUtils } from 'react-day-picker';
 import DayPickerInput from "react-day-picker/DayPickerInput";
@@ -9,9 +10,8 @@ import "react-day-picker/lib/style.css";
 import dateFnsFormat from 'date-fns/format';
 import dateFnsParse from 'date-fns/parse';
 import ViewSchedule from './ViewSchedule';
-
+import { format, parse } from 'date-fns'
 const mongoose = require('mongoose');
-const { format } = require('date-fns');
 
 function parseDate(str, format) {
     const parsed = dateFnsParse(str, format, new Date());
@@ -25,7 +25,7 @@ function formatDate(date, format) {
     return dateFnsFormat(date, format);
 }
 
-export default function NewLesson({ times }) {
+export default function NewLesson() {
     const { data } = useQuery(GET_STUDENTS);
     const [addEvent] = useMutation(ADD_EVENT_AND_EMAIL, {
         refetchQueries: [
@@ -75,9 +75,7 @@ export default function NewLesson({ times }) {
 
         let email = studentEmail;
 
-        let dateString = selectedDay.toString().slice(0, 15);
-
-        let timeStamp = `${dateString} ${time} GMT-0400 (Eastern Daylight Time)`;
+        let timeStamp = parse(schedule, 'MM/dd/yyyy', new Date());
 
         let studentObjectId = mongoose.Types.ObjectId(studentId);
 
@@ -89,6 +87,7 @@ export default function NewLesson({ times }) {
             time: time,
             description: description,
         };
+
         const sendEmailInput = {
             email: 'nelsontjohns@gmail.com',
             senderName: 'Nelson',
