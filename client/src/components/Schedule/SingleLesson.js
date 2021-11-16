@@ -10,7 +10,7 @@ export default function SingleLesson() {
     const [updateEvent] = useMutation(UPDATE_EVENT);
     const { id } = useParams();
     // eslint-disable-next-line
-    const { data, refetch } = useQuery(GET_EVENT, {
+    const { data } = useQuery(GET_EVENT, {
         // Pass the `_id` URL parameter into query to retrieve this event's data
         variables: { _id: id },
     });
