@@ -1,19 +1,27 @@
-import { Container, Card } from "react-bootstrap";
+import { Container } from "react-bootstrap";
 import SelectStudent from "../components/Messages/SelectStudent";
 import PortalNav from "../components/PortalNav";
+import Auth from "../utils/auth";
 
 export default function Messages() {
+    const loggedStatus = Auth.loggedIn();
+    const isTeacher = Auth.getProfile().data.isTeacher;
 
     return (
         <Container>
             <PortalNav />
-            <Card>
-                <h3>Student Messenger</h3>
+
+            {loggedStatus && isTeacher ? (
                 <SelectStudent />
-            </Card>
-            <Card>
-            </Card>
+            ) : (
+                <>
+                    <h2>
+                        You must be logged in as a teacher to access this page.
+                    </h2>
+                </>
+            )}
         </Container>
 
-    )
-}
+    );
+};
+

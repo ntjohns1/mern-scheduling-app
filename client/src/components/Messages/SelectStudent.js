@@ -10,6 +10,7 @@ export default function SelectStudent() {
     const [studentId, setStudentId] = useState('');
     return (
         <>
+            <h3>Student Messenger</h3>
             <InputGroup>
                 <Form.Control
                     as="select"
@@ -23,8 +24,8 @@ export default function SelectStudent() {
                     ))}
                 </Form.Control>
             </InputGroup>
-            <MessageHistory studentId={studentId} setStudentId={setStudentId}/>
-            <AddMessage studentId={studentId} setStudentId={setStudentId}/>
+            <MessageHistory studentId={studentId} setStudentId={setStudentId} />
+            <AddMessage studentId={studentId} setStudentId={setStudentId} />
         </>
     )
 }

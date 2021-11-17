@@ -7,17 +7,22 @@ import Auth from '../utils/auth';
 
 export default function Home() {
     const loggedStatus = Auth.loggedIn();
-    console.log(Auth.getProfile().data.isTeacher);
-    
+    const isTeacher = Auth.getProfile().data.isTeacher;
     return (
         <Container>
-            {loggedStatus && (
-                <PortalNav />
-            )}
-            <Jumbotron>
+            <PortalNav />
+            {loggedStatus && isTeacher ? (
+        < Jumbotron >
                 <h1 className="text-center">Welcome to <FontAwesomeIcon icon={"play-circle"} /> Music Notes</h1>
                 <p className="text-center">An interactive platform for music teachers and students to communicate helpful information.</p>
-            </Jumbotron>
+            </Jumbotron >
+            ) : (
+                <>
+                    <h2>
+                        You must be logged in as a teacher to access this page.
+                    </h2>
+                </>
+            )}
         </Container>
     )
 };

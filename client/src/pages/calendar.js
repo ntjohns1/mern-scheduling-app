@@ -1,21 +1,26 @@
 import React, { useState } from 'react';
 import { Container } from "react-bootstrap";
 import PortalNav from "../components/PortalNav";
-import Calendar from 'react-calendar';
 import 'react-calendar/dist/Calendar.css';
+import CalEl from '../components/Schedule/Calendar';
+import Auth from '../utils/auth'
+const loggedStatus = Auth.loggedIn();
+const isTeacher = Auth.getProfile().data.isTeacher;
+
 
 export default function Cal() {
     const [value, onChange] = useState(new Date());
     return (
         <Container className='text-center'>
             <PortalNav />
-            <h2 className='mt-4'>Calendar</h2>
-            <Container className='my-4 d-flex justify-content-center'>
-                <Calendar
-                    onChange={onChange}
-                    value={value}
-                />
-            </Container>
-        </Container>
-    )
+            {loggedStatus && isTeacher ? (
+                <CalEl />
+            ) : (
+                <>
+                    <h2>
+                        You must be logged in as a teacher to access this page.
+                    </h2>
+                </>
+            )}
+        </Container>)
 };

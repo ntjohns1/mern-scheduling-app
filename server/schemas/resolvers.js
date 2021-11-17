@@ -53,12 +53,12 @@ const resolvers = {
     },
     deleteUser: async (parent, { _id }, context) => {
       try {
-        // if (context.user) {
+        if (context.user) {
         const user = await User.deleteOne({ _id: _id });
 
         return user;
-        // }
-        // throw new AuthenticationError('Not Logged In')
+        }
+        throw new AuthenticationError('Not Logged In')
       } catch (error) {
         throw new AuthenticationError('No user was found');
       }
@@ -81,7 +81,7 @@ const resolvers = {
       return { token, user };
     },
     addEvent: async (parent, { input }, context) => {
-      // if (context.user) {
+      if (context.user.isTeacher) {
         const event = await Event.create({ ...input });
         await User.findOneAndUpdate(
           { _id: event.studentId },
@@ -93,8 +93,8 @@ const resolvers = {
         );
 
         return event;
-      // }
-      // throw new AuthenticationError('You need to be logged in!');
+      }
+      throw new AuthenticationError('Invalid Credentials');
     },
     addMessage: async (parent, { _id, messageText }, context) => {
       if (context.user) {
@@ -115,7 +115,7 @@ const resolvers = {
       throw new AuthenticationError('You need to be logged in!');
     },
     sendEmail: async (parent, { input }, context) => {
-      // if (context.user) {
+      if (context.user.isTeacher) {
   
         const mail = await Email.create({ ...input });
   
@@ -132,11 +132,11 @@ const resolvers = {
         });
 
         return mail;
-      // }
-      // throw new AuthenticationError('You need to be logged in!');
+      }
+      throw new AuthenticationError('Invalid Credentials');
     },
     deleteEvent: async (parent, { _id, userId }, context) => {
-      // if (context.user) {
+      if (context.user.isTeacher) {
         // userId = mongoose.Types.ObjectId('618d324f6de85e6d127da089');
         
         const event = await Event.findOneAndDelete({
@@ -154,10 +154,11 @@ const resolvers = {
         );
 
         return event;
-      // }
-      // throw new AuthenticationError('You need to be logged in!');
+        }
+      throw new AuthenticationError('You need to be logged in!');
     },
     updateEvent: async (parent, args) => {
+      if (context.user.isTeacher) {
       const { _id } = args.input;
        
       const event = await Event.findOneAndUpdate(
@@ -165,6 +166,8 @@ const resolvers = {
         { $set: {...args.input}},
         { new: true });
       return event;
+      }
+      throw new AuthenticationError('You need to be logged in!');
     },
     removeMessage: async (parent, { userId, messageId }, context) => {
       if (context.user) {
