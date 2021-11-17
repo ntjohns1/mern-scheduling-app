@@ -4,6 +4,9 @@ import { EVENTS_BY_DATE, GET_STUDENTS } from '../../utils/queries';
 import { ADD_EVENT_AND_EMAIL } from '../../utils/mutations';
 import times from '../../utils/helpers/times';
 import { Card, Container, Form, Button } from "react-bootstrap";
+import { Link } from 'react-router-dom';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import { faEnvelopeSquare } from '@fortawesome/free-solid-svg-icons'
 import { DateUtils } from 'react-day-picker';
 import DayPickerInput from "react-day-picker/DayPickerInput";
 import "react-day-picker/lib/style.css";
@@ -26,6 +29,8 @@ function formatDate(date, format) {
 }
 
 export default function NewLesson() {
+    const icon = <FontAwesomeIcon icon={faEnvelopeSquare} />
+
     const { data } = useQuery(GET_STUDENTS);
     const [addEvent] = useMutation(ADD_EVENT_AND_EMAIL, {
         refetchQueries: [
@@ -112,6 +117,8 @@ export default function NewLesson() {
     return (
 
         <Container>
+            <h3 className='mb-3 text-center'>Welcome to Schedule Management!</h3>
+
             <Card>
                 <Card.Header>
                     <h3>Schedule a Lesson</h3>
@@ -182,6 +189,11 @@ export default function NewLesson() {
                 </Card.Body>
             </Card>
             <ViewSchedule day={schedule} />
+            <Link to={'/notifications'}>
+                <Button variant="primary" size="lg">
+                    {icon} manage notifications
+                </Button>
+            </Link>
         </Container>
     )
 }

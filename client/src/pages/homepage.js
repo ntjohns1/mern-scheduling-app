@@ -7,7 +7,8 @@ import Auth from '../utils/auth';
 
 export default function Home() {
     const loggedStatus = Auth.loggedIn();
-    console.log(Auth.getProfile());
+    console.log(Auth.getProfile().data.isTeacher);
+    
     return (
         <Container>
             {loggedStatus && (
