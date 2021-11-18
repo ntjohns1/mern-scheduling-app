@@ -10,14 +10,14 @@ import {
     DELETE_USER
 } from "../actions";
 
-const userReducer = (state = null, action) => {
+const userReducer = (state = {}, action) => {
     switch (action.type) {
         case LOG_IN:
             return { ...state, ...action.payload };
         case LOG_OUT:
             return null;
         case FETCH_ALL_USERS:
-            return { ...state, ..._.mapKeys(action.payload, '_id') };
+            return { ...state, ...action.payload };
         case ADD_USER:
             return { ...state, [action.payload._id]: action.payload }
         case UPDATE_USER:

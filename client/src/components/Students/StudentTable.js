@@ -1,13 +1,34 @@
-import React from 'react';
+import React, { useEffect } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
 import { useQuery } from '@apollo/client';
 import { Container } from 'react-bootstrap';
 import { GET_STUDENTS } from '../../utils/queries';
+import { FETCH_ALL_USERS } from '../../store/actions';
 import StudentList from './StudentList';
 
 export default function StudentTable() {
+    // redux
+    const dispatch = useDispatch();
+    const user = useSelector((state) => Object.values(state.user));
+    console.log(user);
+
     // populate table with list of students
     const { loading, data } = useQuery(GET_STUDENTS);
     const students = data?.users || [];
+
+ 
+
+    useEffect(() => {
+        //fetchUsers();
+
+        if(user.length === 0 && data) {
+            dispatch({
+                type: FETCH_ALL_USERS,
+                payload: data.users
+            })
+        }
+    }, [loading, data, dispatch]); 
+
     return (
         <Container>
             <h3 className='text-center'>Welcome to Student Management!</h3>

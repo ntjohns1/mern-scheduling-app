@@ -33,6 +33,7 @@ query {
     _id
     username
     email
+    isTeacher
   }
 }
 `;
