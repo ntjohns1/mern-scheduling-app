@@ -36,13 +36,19 @@ export default function SingleLesson() {
         });
     };
 
+    const buildInput = {
+        studentId: eventData.studentId,
+        studentName: eventData.studentName,
+        date: formState.date,
+        dayRef: formState.dayRef,
+        time: formState.time,
+        description: formState.description,
+    }
+
     const handleUpdate = async () => {
         try {
             await updateEvent({
-                variables: {
-                    _id: id
-                }
-            })
+                variables: { _id: id, ...buildInput }})
         } catch (err) {
             console.log(err);
         }

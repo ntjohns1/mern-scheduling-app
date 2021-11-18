@@ -23,6 +23,10 @@ const userSchema = new Schema({
     type: Boolean,
     default: false,
   },
+  autoNotify:{
+    type: Boolean,
+    default: true,
+  },
   events: [
     {
       type: Schema.Types.ObjectId,

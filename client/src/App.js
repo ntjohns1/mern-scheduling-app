@@ -1,4 +1,5 @@
 import React from 'react';
+import StoreProvider from './store';
 import {
 	ApolloClient,
 	InMemoryCache,
@@ -7,6 +8,7 @@ import {
 } from '@apollo/client';
 import { setContext } from '@apollo/client/link/context';
 import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
+import { createBrowserHistory } from "history";
 import Nav from './components/Navbar';
 import Home from './pages/homepage';
 import Login from './pages/login';
@@ -14,12 +16,13 @@ import Signup from './pages/signup';
 import Portal from './pages/portal';
 import Students from './pages/students';
 import SingleLesson from './components/Schedule/SingleLesson';
-import 'bootstrap/dist/css/bootstrap.min.css';
-import { library } from '@fortawesome/fontawesome-svg-core'
-import { fas } from '@fortawesome/free-solid-svg-icons'
 import Schedule from './pages/schedule';
 import Messages from './pages/messages'
 import Cal from './pages/calendar';
+import SetNotifications from './components/Schedule/SetNotifications';
+import 'bootstrap/dist/css/bootstrap.min.css';
+import { library } from '@fortawesome/fontawesome-svg-core'
+import { fas } from '@fortawesome/free-solid-svg-icons'
 
 library.add(fas);
 
@@ -46,12 +49,15 @@ const client = new ApolloClient({
 	clientState: { defaults: {}, resolvers: {} }
 });
 
+const history = createBrowserHistory();
+
 
 
 export default function App() {
 	return (
 			<ApolloProvider client={client}>
-				<Router>
+				<StoreProvider>
+				<Router history={history}>
 					<Nav />
 					<Switch>
 						<Route exact path='/'>
@@ -65,6 +71,9 @@ export default function App() {
 						</Route>
 						<Route exact path='/schedule'>
 							<Schedule />
+						</Route>
+						<Route exact path='/notifications'>
+							<SetNotifications />
 						</Route>
 						<Route exact path='/lesson/:id'>
 							<SingleLesson />
@@ -83,6 +92,7 @@ export default function App() {
 						</Route>
 					</Switch>
 				</Router>
+				</ StoreProvider>
 			</ApolloProvider>
 	);
 };
