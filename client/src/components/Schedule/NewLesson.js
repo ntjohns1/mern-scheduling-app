@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { useQuery, useMutation } from "@apollo/client";
+import { useSelector } from 'react-redux';
 import { EVENTS_BY_DATE, GET_STUDENTS } from '../../utils/queries';
 import { ADD_EVENT_AND_EMAIL } from '../../utils/mutations';
 import times from '../../utils/helpers/times';
@@ -30,15 +31,17 @@ function formatDate(date, format) {
 
 export default function NewLesson() {
     const icon = <FontAwesomeIcon icon={faEnvelopeSquare} />
+    const students = useSelector((state) => Object.values(state.user));
 
-    const { data } = useQuery(GET_STUDENTS);
+
+    // const { data } = useQuery(GET_STUDENTS);
     const [addEvent] = useMutation(ADD_EVENT_AND_EMAIL, {
         refetchQueries: [
             EVENTS_BY_DATE, // DocumentNode object parsed with gql
             'eventsByDate' // Query name
         ],
     });
-    const students = data?.users || [];
+    // const students = data?.users || [];
     const [studentId, setStudentId] = useState('');
     const [studentName, setStudentName] = useState('');
     const [studentEmail, setStudentEmail] = useState('');
@@ -82,10 +85,10 @@ export default function NewLesson() {
 
         let timeStamp = parse(schedule, 'MM/dd/yyyy', new Date());
 
-        let studentObjectId = mongoose.Types.ObjectId(studentId);
+        let studentId = mongoose.Types.ObjectId(studentId);
 
         const eventInput = {
-            studentId: studentObjectId,
+            studentId: studentId,
             studentName: studentName,
             date: timeStamp,
             dayRef: schedule,
@@ -134,7 +137,7 @@ export default function NewLesson() {
                                 onChange={handleChange}
                             >
                                 <option value=''> Select a Student </option>
-                                {students.map((option) => (
+                                {students && students.map((option) => (
                                     <option value={option._id} key={option._id}>{option.username}</option>
                                 ))}
                             </Form.Control>
