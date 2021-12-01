@@ -4,12 +4,12 @@ import PortalNav from "../components/PortalNav";
 import 'react-calendar/dist/Calendar.css';
 import CalEl from '../components/Schedule/Calendar';
 import Auth from '../utils/auth'
-const loggedStatus = Auth.loggedIn();
-const isTeacher = Auth.getProfile().data.isTeacher;
 
 
 export default function Cal() {
     const [value, onChange] = useState(new Date());
+    const loggedStatus = Auth.loggedIn();
+    const isTeacher = Auth.getProfile().data.isTeacher;
     return (
         <Container className='text-center'>
             <PortalNav />

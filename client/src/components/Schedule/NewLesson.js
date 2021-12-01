@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { useQuery, useMutation } from "@apollo/client";
+import { useSelector } from 'react-redux';
 import { EVENTS_BY_DATE, GET_STUDENTS } from '../../utils/queries';
 import { ADD_EVENT_AND_EMAIL } from '../../utils/mutations';
 import times from '../../utils/helpers/times';
@@ -13,6 +14,7 @@ import "react-day-picker/lib/style.css";
 import dateFnsFormat from 'date-fns/format';
 import dateFnsParse from 'date-fns/parse';
 import ViewSchedule from './ViewSchedule';
+import SelectStudent from '../SelectStudent';
 import { format, parse } from 'date-fns'
 const mongoose = require('mongoose');
 
@@ -30,15 +32,17 @@ function formatDate(date, format) {
 
 export default function NewLesson() {
     const icon = <FontAwesomeIcon icon={faEnvelopeSquare} />
+    const students = useSelector((state) => Object.values(state.user));
 
-    const { data } = useQuery(GET_STUDENTS);
+
+    // const { data } = useQuery(GET_STUDENTS);
     const [addEvent] = useMutation(ADD_EVENT_AND_EMAIL, {
         refetchQueries: [
             EVENTS_BY_DATE, // DocumentNode object parsed with gql
             'eventsByDate' // Query name
         ],
     });
-    const students = data?.users || [];
+    // const students = data?.users || [];
     const [studentId, setStudentId] = useState('');
     const [studentName, setStudentName] = useState('');
     const [studentEmail, setStudentEmail] = useState('');
@@ -82,10 +86,10 @@ export default function NewLesson() {
 
         let timeStamp = parse(schedule, 'MM/dd/yyyy', new Date());
 
-        let studentObjectId = mongoose.Types.ObjectId(studentId);
+        let studentId = mongoose.Types.ObjectId(studentId);
 
         const eventInput = {
-            studentId: studentObjectId,
+            studentId: studentId,
             studentName: studentName,
             date: timeStamp,
             dayRef: schedule,
@@ -125,7 +129,7 @@ export default function NewLesson() {
                 </Card.Header>
                 <Card.Body>
                     <Form onSubmit={handleForm}>
-                        <Form.Group className='mb-3'>
+                        {/* <Form.Group className='mb-3'>
                             <Form.Label className='mb-2'>Select A Student: </Form.Label><br />
                             <Form.Control
                                 as="select"
@@ -134,11 +138,12 @@ export default function NewLesson() {
                                 onChange={handleChange}
                             >
                                 <option value=''> Select a Student </option>
-                                {students.map((option) => (
+                                {students && students.map((option) => (
                                     <option value={option._id} key={option._id}>{option.username}</option>
                                 ))}
                             </Form.Control>
-                        </Form.Group>
+                        </Form.Group> */}
+                        <SelectStudent _id={students._id}/>
                         <Form.Group className='mb-3'>
                             <Form.Label >Select Date: </Form.Label><br />
                             <DayPickerInput
