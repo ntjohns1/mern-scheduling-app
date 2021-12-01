@@ -14,6 +14,7 @@ import "react-day-picker/lib/style.css";
 import dateFnsFormat from 'date-fns/format';
 import dateFnsParse from 'date-fns/parse';
 import ViewSchedule from './ViewSchedule';
+import SelectStudent from '../SelectStudent';
 import { format, parse } from 'date-fns'
 const mongoose = require('mongoose');
 
@@ -128,7 +129,7 @@ export default function NewLesson() {
                 </Card.Header>
                 <Card.Body>
                     <Form onSubmit={handleForm}>
-                        <Form.Group className='mb-3'>
+                        {/* <Form.Group className='mb-3'>
                             <Form.Label className='mb-2'>Select A Student: </Form.Label><br />
                             <Form.Control
                                 as="select"
@@ -141,7 +142,8 @@ export default function NewLesson() {
                                     <option value={option._id} key={option._id}>{option.username}</option>
                                 ))}
                             </Form.Control>
-                        </Form.Group>
+                        </Form.Group> */}
+                        <SelectStudent _id={students._id}/>
                         <Form.Group className='mb-3'>
                             <Form.Label >Select Date: </Form.Label><br />
                             <DayPickerInput

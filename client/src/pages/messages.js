@@ -1,5 +1,5 @@
 import { Container } from "react-bootstrap";
-import SelectStudent from "../components/Messages/SelectStudent";
+import Messenger from "../components/Messages/Messenger";
 import PortalNav from "../components/PortalNav";
 import Auth from "../utils/auth";
 
@@ -12,7 +12,7 @@ export default function Messages() {
             <PortalNav />
 
             {loggedStatus && isTeacher ? (
-                <SelectStudent />
+                <Messenger />
             ) : (
                 <>
                     <h2>
