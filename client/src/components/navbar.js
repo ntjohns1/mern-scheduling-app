@@ -7,6 +7,10 @@ import '../App.css';
 
 export default function Navigation() {
     const loggedStatus = Auth.loggedIn();
+	const logout = (event) => {
+		event.preventDefault();
+		Auth.logout();
+	  };
     return (
         <>
             <Navbar
@@ -27,8 +31,8 @@ export default function Navigation() {
 							Home
 						</Nav.Link>
 						{loggedStatus && (
-							<Nav.Link style={{ color: 'white' }} onClick={Auth.logout}>
-								Logout
+							<Nav.Link style={{ color: 'white' }} onClick={logout}>
+							Logout
 							</Nav.Link>
 						)}
 						{!loggedStatus && (

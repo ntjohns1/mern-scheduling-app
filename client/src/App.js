@@ -7,13 +7,12 @@ import {
 	createHttpLink,
 } from '@apollo/client';
 import { setContext } from '@apollo/client/link/context';
-import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
+import { BrowserRouter as Router, Route, Redirect, Switch } from 'react-router-dom';
 import { createBrowserHistory } from "history";
 import Nav from './components/Navbar';
 import Home from './pages/homepage';
 import Login from './pages/login';
 import Signup from './pages/signup';
-import Portal from './pages/portal';
 import Students from './pages/students';
 import SingleLesson from './components/Schedule/SingleLesson';
 import Schedule from './pages/schedule';
@@ -23,6 +22,8 @@ import SetNotifications from './components/Schedule/SetNotifications';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import { library } from '@fortawesome/fontawesome-svg-core'
 import { fas } from '@fortawesome/free-solid-svg-icons'
+import Auth from './utils/auth'
+import Portal from './layouts/Portal';
 
 library.add(fas);
 
@@ -51,7 +52,7 @@ const client = new ApolloClient({
 
 const history = createBrowserHistory();
 
-
+const loggedStatus = Auth.loggedIn();
 
 export default function App() {
 	return (
@@ -61,7 +62,7 @@ export default function App() {
 					<Nav />
 					<Switch>
 						<Route exact path='/'>
-							<Home />
+						{loggedStatus ? <Redirect to="/portal" /> : <Home />}
 						</Route>
 						<Route exact path='/portal'>
 							<Portal />
