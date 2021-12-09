@@ -1,7 +1,7 @@
 import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useQuery } from '@apollo/client';
-import { Container } from 'react-bootstrap';
+import { Container, Spinner } from 'react-bootstrap';
 import { GET_STUDENTS } from '../../utils/queries';
 import { FETCH_ALL_USERS } from '../../store/actions';
 import StudentList from './StudentList';
@@ -35,7 +35,9 @@ export default function StudentTable() {
             <h4 className='my-4 text-center'>View Current Students</h4>
             <div className='p-4 my-4 d-flex justify-content-center'>
                 {loading ? (
-                    <div>Loading...</div>
+                       <Spinner animation="border" role="status">
+                       <span className="visually-hidden">Loading...</span>
+                     </Spinner>
                 ) : (
                     <div>
                         {students && students.map((student) => (

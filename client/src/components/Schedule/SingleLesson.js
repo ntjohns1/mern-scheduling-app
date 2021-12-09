@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import { useQuery, useMutation } from "@apollo/client";
 import { useParams } from 'react-router-dom';
 import { GET_EVENT } from '../../utils/queries';

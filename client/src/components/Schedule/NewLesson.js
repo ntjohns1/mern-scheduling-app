@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
-import { useQuery, useMutation } from "@apollo/client";
+import { useMutation } from "@apollo/client";
 import { useSelector } from 'react-redux';
-import { EVENTS_BY_DATE, GET_STUDENTS } from '../../utils/queries';
+import { EVENTS_BY_DATE } from '../../utils/queries';
 import { ADD_EVENT_AND_EMAIL } from '../../utils/mutations';
 import times from '../../utils/helpers/times';
 import { Card, Container, Form, Button } from "react-bootstrap";
@@ -13,9 +13,9 @@ import DayPickerInput from "react-day-picker/DayPickerInput";
 import "react-day-picker/lib/style.css";
 import dateFnsFormat from 'date-fns/format';
 import dateFnsParse from 'date-fns/parse';
+import { format, parse } from 'date-fns'
 import ViewSchedule from './ViewSchedule';
 import SelectStudent from '../SelectStudent';
-import { format, parse } from 'date-fns'
 const mongoose = require('mongoose');
 
 function parseDate(str, format) {
@@ -59,9 +59,9 @@ export default function NewLesson() {
         setSchedule(input.value);
     }
 
-    const handleChange = async (e) => {
-        setStudentId(e.target.value)
-    };
+    // const handleChange = async (e) => {
+    //     setStudentId(e.target.value)
+    // };
 
     const getNames = (e) => {
         for (let i = 0; i < students.length; i++) {
@@ -85,11 +85,11 @@ export default function NewLesson() {
         let email = studentEmail;
 
         let timeStamp = parse(schedule, 'MM/dd/yyyy', new Date());
-
-        let studentId = mongoose.Types.ObjectId(studentId);
-
+        // TODO: use redux to get the student ID, Id is not being passed bc of how 
+        // the SelectStudent component is being rendered
+        let studentObjectId = mongoose.Types.ObjectId(studentId);
         const eventInput = {
-            studentId: studentId,
+            studentId: studentObjectId,
             studentName: studentName,
             date: timeStamp,
             dayRef: schedule,

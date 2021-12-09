@@ -1,4 +1,4 @@
-import { Container, Col, Row, Card } from "react-bootstrap";
+import { Container } from "react-bootstrap";
 import Auth from '../utils/auth'
 
 

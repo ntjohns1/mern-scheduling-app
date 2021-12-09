@@ -1,14 +1,10 @@
 import React, { useState } from 'react';
-import { useQuery } from "@apollo/client";
-import { GET_STUDENTS } from '../../utils/queries';
-import { InputGroup, Form } from "react-bootstrap";
+import { InputGroup } from "react-bootstrap";
 import SelectStudent from '../SelectStudent';
 import AddMessage from './AddMessage';
 import MessageHistory from './MessageHistory';
 export default function Messenger(props) {
-    console.log(props);
-    const { data } = useQuery(GET_STUDENTS);
-    const students = data?.users || [];
+    // console.log(props);
     const [studentId, setStudentId] = useState('');
     return (
         <>
