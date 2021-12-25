@@ -13,9 +13,8 @@ const resolvers = {
     user: async (parent, { _id }) => {
       return User.findOne({ _id }).populate('events').populate('messages');
     },
-    events: async (parent, { username }) => {
-      const params = username ? { username } : {};
-      return Event.find(params).sort({ createdAt: -1 });
+    events: async () => {
+      return Event.find().sort({ date: -1 });
     },
     eventsByDate: async (parent, { dayRef },) => {
       const params = dayRef ? { dayRef } : {};

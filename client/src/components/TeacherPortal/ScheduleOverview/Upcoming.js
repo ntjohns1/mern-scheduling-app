@@ -1,9 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { useQuery } from '@apollo/client';
 import { EVENTS_BY_DATE } from '../../../utils/queries';
-import { ListGroup, Container, Card } from 'react-bootstrap';
-import DeleteButton from '../../Schedule/DeleteButton';
-import EditButton from '../../Schedule/EditButton';
+import { Container, Card } from 'react-bootstrap';
 import { DateUtils } from 'react-day-picker';
 import DayPickerInput from "react-day-picker/DayPickerInput";
 import "react-day-picker/lib/style.css";
@@ -24,21 +22,28 @@ function formatDate(date, format) {
 }
 
 export default function Upcoming() {
-    const [dayRef, setDayRef] = useState('');
+    const minute = 1000 * 60;
+    const hour = minute * 60;
+    const day = hour * 24;
+    const [dayRef, setDayRef] = useState();
     const [schedule, setSchedule] = useState('');
     const FORMAT = 'MM/dd/yyyy';
-
 
     const dayChange = (day, modifiers, dayPickerInput) => {
         format(day, 'MM.dd.yyyy');
         const input = dayPickerInput.getInput();
         setSchedule(input.value);
     }
-
+    const now = Date.now()
+    const today = format(now, 'P');
+    if (dayRef === '') {
+        setDayRef(today)
+    }
 
     useEffect(() => {
         setDayRef(schedule);
     }, [schedule]);
+
 
     const { data } = useQuery(EVENTS_BY_DATE, {
         variables: { dayRef: dayRef },
@@ -50,7 +55,7 @@ export default function Upcoming() {
             <h3>Scheudle</h3>
             <DayPickerInput
                 onDayChange={dayChange}
-                hideOnDayClick={false}
+                hideOnDayClick={true}
                 placeholder="mm/dd/yyyy"
                 formatDate={formatDate}
                 format={FORMAT}
@@ -61,7 +66,7 @@ export default function Upcoming() {
                 <Card.Body>
                     <ul>
                         {lesson && lesson.map((lesson) => (
-                            <li>{lesson.time}:  {lesson.studentName}</li>
+                            <li key={lesson._id}>{lesson.time}:  {lesson.studentName}</li>
                         ))}
                     </ul>
                 </Card.Body>

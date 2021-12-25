@@ -1,6 +1,5 @@
 const { Schema, model } = require('mongoose');
 const dateFormat = require('../utils/dateFormat');
-// date, content, user
 const eventSchema = new Schema({
     studentId: {
         type: Schema.Types.ObjectId,

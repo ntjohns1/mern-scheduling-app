@@ -33,6 +33,8 @@ function formatDate(date, format) {
 export default function NewLesson() {
     const icon = <FontAwesomeIcon icon={faEnvelopeSquare} />
     const students = useSelector((state) => Object.values(state.user));
+    const student = useSelector((state) => state.student);
+
 
 
     // const { data } = useQuery(GET_STUDENTS);
@@ -75,6 +77,10 @@ export default function NewLesson() {
     useEffect(() => {
         getNames();
     });
+
+    useEffect(() => {
+        setStudentId(student);
+    }, [student]);
 
     const handleForm = async (e) => {
         e.preventDefault();

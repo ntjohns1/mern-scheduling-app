@@ -2,7 +2,6 @@ import React from 'react';
 import { Toast } from 'react-bootstrap';
 
 export default function StudentTag({ students }) {
-    console.log(students);
     return (
    
                 <Toast>

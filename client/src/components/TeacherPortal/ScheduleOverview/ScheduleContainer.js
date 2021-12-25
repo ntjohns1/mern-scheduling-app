@@ -15,6 +15,9 @@ export default function ScheduleContainer() {
     if (currentPage === 'Upcoming') {
       return <Upcoming />;
     }
+    else {
+      return <Upcoming />
+    }
   };
 
   const handlePageChange = (page) => setCurrentPage(page);

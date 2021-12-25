@@ -10,8 +10,6 @@ export default function StudentTable() {
     // redux
     const dispatch = useDispatch();
     const user = useSelector((state) => Object.values(state.user));
-    console.log(user);
-
     // populate table with list of students
     const { loading, data } = useQuery(GET_STUDENTS);
     const students = data?.users || [];
