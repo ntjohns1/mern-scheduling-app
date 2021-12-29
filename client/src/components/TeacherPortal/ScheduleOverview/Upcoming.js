@@ -1,13 +1,23 @@
 import React, { useEffect, useState } from 'react';
 import { useQuery } from '@apollo/client';
 import { EVENTS_BY_DATE } from '../../../utils/queries';
-import { Container, Card } from 'react-bootstrap';
+import { Container, Card, Row, Col } from 'react-bootstrap';
 import { DateUtils } from 'react-day-picker';
 import DayPickerInput from "react-day-picker/DayPickerInput";
 import "react-day-picker/lib/style.css";
 import dateFnsFormat from 'date-fns/format';
 import dateFnsParse from 'date-fns/parse';
-import { format, parse } from 'date-fns'
+import { format, parse } from 'date-fns';
+import SingleDay from '../../Schedule/SingleDay';
+
+// TODO:
+
+// DISPLAY LESSONS FOR NEXT 3 DAYS
+// Divide container into three vertical parts
+// Query events by date
+// display events for next three days
+
+// CREATE SINGLE DAY CALENDAR VIEW
 
 function parseDate(str, format) {
     const parsed = dateFnsParse(str, format, new Date());
@@ -51,26 +61,29 @@ export default function Upcoming() {
     const lesson = data?.eventsByDate || [];
 
     return (
-        <Container>
-            <h3>Scheudle</h3>
-            <DayPickerInput
+        <>
+            {/* <DayPickerInput
                 onDayChange={dayChange}
                 hideOnDayClick={true}
                 placeholder="mm/dd/yyyy"
                 formatDate={formatDate}
                 format={FORMAT}
                 parseDate={parseDate}
-            />
-            <Card>
-                <Card.Title></Card.Title>
-                <Card.Body>
-                    <ul>
-                        {lesson && lesson.map((lesson) => (
-                            <li key={lesson._id}>{lesson.time}:  {lesson.studentName}</li>
-                        ))}
-                    </ul>
-                </Card.Body>
-            </Card>
-        </Container>
+            /> */}
+            <div className='text-center'>
+                <h3 className='mb-4'>Upcoming</h3>
+                <Row>
+                    <Col>
+                    <SingleDay />
+                    </Col>
+                    <Col>
+                    <SingleDay />
+                    </Col>
+                    <Col>
+                    <SingleDay />
+                    </Col>
+                </Row>
+            </div>
+        </>
     )
 };
