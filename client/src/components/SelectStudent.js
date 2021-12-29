@@ -1,21 +1,19 @@
 import React, { useState, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useQuery } from '@apollo/client';
-import { Container, Form } from 'react-bootstrap';
+import { Form } from 'react-bootstrap';
 import { GET_STUDENTS } from '../utils/queries';
-import { FETCH_ALL_USERS } from '../store/actions';
+import { FETCH_ALL_USERS, FETCH_USER } from '../store/actions';
 
 export default function SelectStudent() {
     const [studentId, setStudentId] = useState('');
     const dispatch = useDispatch();
     const user = useSelector((state) => Object.values(state.user));
-    console.log(user);
 
     // populate table with list of students
     const { loading, data } = useQuery(GET_STUDENTS);
-    const students = data?.users || [];
-
-
+    const users = data?.users || [];
+    const students = users.filter((user) => !user.isTeacher);
 
     useEffect(() => {
         //fetchUsers();
@@ -27,6 +25,14 @@ export default function SelectStudent() {
             })
         }
     }, [loading, data, dispatch]);
+
+    useEffect(() => {
+            dispatch({
+                type: FETCH_USER,
+                payload: studentId
+            })
+    }, [studentId]);
+
 
     const handleChange = async (e) => {
         setStudentId(e.target.value)

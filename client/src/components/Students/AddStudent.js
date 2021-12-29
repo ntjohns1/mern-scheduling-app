@@ -1,6 +1,5 @@
 import React, { useState } from 'react';
 import { Card, Container, Form, Button } from 'react-bootstrap';
-import PortalNav from '../PortalNav';
 import StudentTable from './StudentTable';
 import { useMutation } from '@apollo/client';
 import { ADD_USER } from '../../utils/mutations';
@@ -53,7 +52,6 @@ export default function AddStudent() {
     };
     return (
         <Container className='p-4 my-4'>
-            <PortalNav />
             <StudentTable />
             <Card>
                 <Card.Header>

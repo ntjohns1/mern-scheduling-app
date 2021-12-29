@@ -24,8 +24,6 @@ export default function SetNotifications() {
     // for all returned users, send a reminder email.
     // const [sendEmail] = useMutation(SEND_EMAIL);
 
-    console.log(lesson);
-
     // Set up Boolean property on user called autoNotify
     // now only send emails to autoNotify: true users 
     // if (user.autoNotify === true) {

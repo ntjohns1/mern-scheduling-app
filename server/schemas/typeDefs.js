@@ -72,7 +72,7 @@ type User {
   type Query {
     users: [User]
     user(_id: ID!): User
-    events(username: String): [Event]
+    events: [Event]
     eventsByDate(dayRef: String): [Event]
     event(_id: ID!): Event
     me: User

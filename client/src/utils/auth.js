@@ -5,7 +5,13 @@ import decode from 'jwt-decode';
 class AuthService {
   // get user data from JSON web token by decoding it
   getProfile() {
-    return decode(this.getToken());
+    try {
+      // valid token format
+      return decode(this.getToken());
+    } catch(error) {
+      // invalid token format
+      window.location.assign('/');
+    }
   }
 
   // return `true` or `false` if token exists (does not verify if it's expired yet)
@@ -22,14 +28,14 @@ class AuthService {
   login(idToken) {
     // Saves user token to localStorage and reloads the application for logged in status to take effect
     localStorage.setItem('id_token', idToken);
-    window.location.assign('/');
+    window.location.assign('/portal');
   }
 
   logout() {
     // Clear user token and profile data from localStorage
     localStorage.removeItem('id_token');
     // this will reload the page and reset the state of the application
-    document.location.replace('/');
+    window.location.reload();
   }
 }
 

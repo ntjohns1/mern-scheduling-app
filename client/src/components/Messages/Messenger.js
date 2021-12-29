@@ -1,15 +1,19 @@
-import React, { useState } from 'react';
-import { useQuery } from "@apollo/client";
-import { GET_STUDENTS } from '../../utils/queries';
-import { InputGroup, Form } from "react-bootstrap";
+import React, { useState, useEffect } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
+import { InputGroup } from "react-bootstrap";
 import SelectStudent from '../SelectStudent';
 import AddMessage from './AddMessage';
 import MessageHistory from './MessageHistory';
+
 export default function Messenger(props) {
-    console.log(props);
-    const { data } = useQuery(GET_STUDENTS);
-    const students = data?.users || [];
+    // console.log(props);
+    const student = useSelector((state) => state.student);
     const [studentId, setStudentId] = useState('');
+
+    useEffect(() => {
+        setStudentId(student);
+    }, [student]);
+
     return (
         <>
             <h3>Student Messenger</h3>
@@ -25,7 +29,7 @@ export default function Messenger(props) {
                         <option value={option._id} key={option._id}>{option.username}</option>
                     ))}
                 </Form.Control> */}
-                <SelectStudent studentId={studentId}/>
+                <SelectStudent />
             </InputGroup>
             <MessageHistory studentId={studentId} setStudentId={setStudentId} />
             <AddMessage studentId={studentId} setStudentId={setStudentId} />

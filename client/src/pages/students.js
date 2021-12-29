@@ -11,6 +11,7 @@ export default function Students() {
     const isTeacher = Auth.getProfile().data.isTeacher;
     return (
         <Container>  
+            <PortalNav />
             {loggedStatus && isTeacher ? (
                 <AddStudent />
             ) : (

@@ -19,7 +19,7 @@ const userReducer = (state = {}, action) => {
         case FETCH_ALL_USERS:
             return { ...state, ...action.payload };
         case ADD_USER:
-            return { ...state, [action.payload._id]: action.payload }
+            return { ...state, [action.payload._id]: action.payload };
         case UPDATE_USER:
             let currentValues = state[action.payload._id];
             let updatedValues = { ...currentValues, ...action.payload };

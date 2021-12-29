@@ -1,7 +1,4 @@
 /** MESSAGE reducer functions */
-
-import _ from 'lodash';
-
 import { ADD_MESSAGE } from '../actions';
 
 const messageReducer = (state = {}, action) => {
