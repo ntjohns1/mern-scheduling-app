@@ -145,4 +145,147 @@ const times = [
     },
 ];
 
-export default times
+const myDay = [
+    {
+        id: "0",
+        hour: "8:00am",
+        time: "8:00",
+    },
+    {
+        id: "1",
+        hour: "8:30am",
+        time: "8:30",
+    },
+    {
+        id: "2",
+        hour: "9:00am",
+        time: "9:00",
+    },
+    {
+        id: "3",
+        hour: "9:30am",
+        time: "9:30",
+    },
+    {
+        id: "4",
+        hour: "10:00am",
+        time: "10:00",
+    },
+    {
+        id: "5",
+        hour: "10:30am",
+        time: "10:30",
+    },
+    {
+        id: "6",
+        hour: "11:00am",
+        time: "11:00",
+    },
+    {
+        id: "7",
+        hour: "11:30am",
+        time: "11:30",
+    },
+    {
+        id: "8",
+        hour: "12:00pm",
+        time: "12:00",
+    },
+    {
+        id: "9",
+        hour: "12:30pm",
+        time: "12:30",
+    },
+    {
+        id: "10",
+        hour: "1:00pm",
+        time: "13:00",
+    },
+    {
+        id: "11",
+        hour: "1:30pm",
+        time: "13:30",
+    },
+    {
+        id: "12",
+        hour: "2:00pm",
+        time: "14:00",
+    },
+    {
+        id: "13",
+        hour: "2:30pm",
+        time: "14:30",
+    },
+    {
+        id: "14",
+        hour: "3:00pm",
+        time: "15:00",
+    },
+    {
+        id: "15",
+        hour: "3:30pm",
+        time: "15:30",
+    },
+    {
+        id: "16",
+        hour: "4:00pm",
+        time: "16:00",
+    },
+    {
+        id: "17",
+        hour: "4:30pm",
+        time: "16:30pm",
+    },
+    {
+        id: "18",
+        hour: "5:00pm",
+        time: "17:00",
+    },
+    {
+        id: "19",
+        hour: "5:30pm",
+        time: "17:30",
+    },
+    {
+        id: "20",
+        hour: "6:00pm",
+        time: "18:00",
+    },
+    {
+        id: "21",
+        hour: "6:30pm",
+        time: "18:30",
+    },
+    {
+        id: "22",
+        hour: "7:00pm",
+        time: "19:00",
+    },
+    {
+        id: "23",
+        hour: "7:30pm",
+        time: "19:30",
+    },
+    {
+        id: "24",
+        hour: "8:00pm",
+        time: "20:00",
+    },
+    {
+        id: "25",
+        hour: "8:30pm",
+        time: "20:00",
+    },
+    {
+        id: "26",
+        hour: "9:00pm",
+        time: "21:00",
+    },
+    {
+        id: "27",
+        hour: "9:30pm",
+        time: "21:00",
+    },
+]
+
+export default times && myDay;

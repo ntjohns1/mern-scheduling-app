@@ -32,7 +32,7 @@ db.once('open', async () => {
       "studentName": users[1].username,
       "date": d0,
       "dayRef": format(d0),
-      "time": "15:00pm",
+      "time": "9:00am",
       "description": "Lesson",
     },
     {
