@@ -35,13 +35,6 @@ const styles = {
 
 
 export default function SingleDay() {
-    scrollTo(element) {
-        window.scroll({
-          behavior: 'smooth',
-          left: 0,
-          top: element.offsetTop
-        });
-      }
     return (
         <Card style={styles.dayCard} scrollTo>
             {myDay.map((day) => (
