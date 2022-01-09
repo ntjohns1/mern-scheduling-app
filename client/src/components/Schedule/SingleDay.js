@@ -1,53 +1,6 @@
 import { Row, Col, Card } from 'react-bootstrap';
+import myDay from '../../utils/helpers/times';
 
-const myDay = [
-    {
-        id: "0",
-        hour: "2pm",
-        time: "14",
-    },
-    {
-        id: "1",
-        hour: "3pm",
-        time: "15",
-    },
-    {
-        id: "2",
-        hour: "4pm",
-        time: "16",
-    },
-    {
-        id: "3",
-        hour: "5pm",
-        time: "17",
-    },
-    {
-        id: "4",
-        hour: "6pm",
-        time: "18",
-    },
-    {
-        id: "5",
-        hour: "7pm",
-        time: "19",
-    },
-    {
-        id: "6",
-        hour: "8pm",
-        time: "20",
-    },
-    {
-        id: "7",
-        hour: "9pm",
-        time: "21",
-    },
-    {
-        id: "8",
-        hour: "10pm",
-        time: "22",
-    },
-
-]
 
 const styles = {
     textarea: {
@@ -75,14 +28,22 @@ const styles = {
         fontSize: '12px'
     },
     dayCard: {
-        overflow: 'scroll'
+        height: "50vh",
+        overflowY: 'scroll'
     },
 };
 
-export default function SingleDay() {
 
+export default function SingleDay() {
+    scrollTo(element) {
+        window.scroll({
+          behavior: 'smooth',
+          left: 0,
+          top: element.offsetTop
+        });
+      }
     return (
-        <Card style={styles.dayCard}>
+        <Card style={styles.dayCard} scrollTo>
             {myDay.map((day) => (
                 <Row  className='px-3'>
                     <Col xs={4} style={styles.hour}>

@@ -10,14 +10,23 @@ import dateFnsParse from 'date-fns/parse';
 import { format, parse } from 'date-fns';
 import SingleDay from '../../Schedule/SingleDay';
 
-// TODO:
 
-// DISPLAY LESSONS FOR NEXT 3 DAYS
-// Divide container into three vertical parts
-// Query events by date
-// display events for next three days
+/*
+*****************************************************************
+-----------------------------------------------------------------
+*****************************************************************
 
-// CREATE SINGLE DAY CALENDAR VIEW
+TODO: 
+
+Query upcoming lessons
+
+*****************************************************************
+-----------------------------------------------------------------
+*****************************************************************
+ 
+*/
+
+
 
 function parseDate(str, format) {
     const parsed = dateFnsParse(str, format, new Date());
