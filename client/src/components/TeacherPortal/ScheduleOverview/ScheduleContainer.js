@@ -30,7 +30,7 @@ export default function ScheduleContainer() {
         <SchedulelNav currentPage={currentPage} handlePageChange={handlePageChange} />
         <hr />
       </Card.Header>
-      <Card.Body>
+      <Card.Body className='d-flex justify-content-center'>
         <div>
           {renderPage()}
         </div>
