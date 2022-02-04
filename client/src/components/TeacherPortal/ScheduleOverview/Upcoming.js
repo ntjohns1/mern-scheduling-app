@@ -82,13 +82,13 @@ export default function Upcoming() {
             <div className='text-center'>
                 <h3 className='mb-4'>Upcoming</h3>
                 <Row>
-                    <Col>
+                    <Col xs={4}>
                     <SingleDay />
                     </Col>
-                    <Col>
+                    <Col xs={4}>
                     <SingleDay />
                     </Col>
-                    <Col>
+                    <Col xs={4}>
                     <SingleDay />
                     </Col>
                 </Row>

@@ -1,4 +1,4 @@
-import { Row, Col, Card } from 'react-bootstrap';
+import { Row, Col, Card, Toast } from 'react-bootstrap';
 import myDay from '../../utils/helpers/times';
 
 
@@ -36,17 +36,20 @@ const styles = {
 
 export default function SingleDay() {
     return (
-        <Card style={styles.dayCard} scrollTo>
-            {myDay.map((day) => (
-                <Row  className='px-3'>
-                    <Col xs={4} style={styles.hour}>
-                        <p>{day.hour}</p>
-                    </Col >
-                    <Col xs={8} style={styles.row}>
-                    
-                    </Col>
-                </Row>
-            ))}
+        <Card>
+            <Card.Title className='mt-3'> DoW MM/DD </Card.Title >
+            <Card.Body style={styles.dayCard} scrollTo>
+                {myDay.map((day) => (
+                    <Toast className='px-3'>
+                        <Col xs={4} >
+                            <p>{day.hour}</p>
+                        </Col >
+                        <Col xs={8} >
+
+                        </Col>
+                    </Toast>
+                ))}
+            </Card.Body>
         </Card>
     )
 }
