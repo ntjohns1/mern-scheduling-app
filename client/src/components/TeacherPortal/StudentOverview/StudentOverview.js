@@ -36,7 +36,7 @@ export default function StudentOverview() {
                     </Spinner>
                 ) : (
                     <div>
-                        <Card style={{ width: '18rem' }} className="mx-4 shadow-lg">
+                        <Card style={{ width: '16rem' }} className="mx-4 shadow-lg">
                             <Card.Body>
                                 <Card.Title className='text-center'>Students</Card.Title>
                                 {students && students.map((student) => (

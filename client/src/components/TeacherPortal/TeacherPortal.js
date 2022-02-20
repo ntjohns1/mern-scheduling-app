@@ -11,19 +11,19 @@ export default function TeacherPortal() {
     return (
         <Container fluid>
             <Row>
-                <Col xs={2}>
+                <Col xs={1}>
                     <Sidebar />
                 </Col>
-                <Col xs={10}>
+                <Col xs={11}>
                     {loggedStatus && isTeacher ? (
                         <Container>
                             <Row>
-                                <Col xs={3}>
+                                <Col xs={2}>
                                     <div className="p-3">
                                         <StudentOverview />
                                     </div>
                                 </Col>
-                                <Col xs={9}>
+                                <Col xs={10}>
                                     <div className="p-3">
                                         <ScheduleContainer />
                                     </div>

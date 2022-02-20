@@ -13,7 +13,7 @@ export const FETCH_ALL_USERS = 'FETCH_ALL_USERS';
 
 
 /* EVENT ACTIONS */
-export const EVENTS_BY_DATE = 'EVENTS_BY_DATE';
+export const GET_EVENTS_BY_DATE = 'GET_EVENTS_BY_DATE';
 export const FETCH_EVENT = 'FETCH_EVENT';
 export const ADD_EVENT = 'ADD_EVENT';
 export const UPDATE_EVENT = 'UPDATE_EVENT';

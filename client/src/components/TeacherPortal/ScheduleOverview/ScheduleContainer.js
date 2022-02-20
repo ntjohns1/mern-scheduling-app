@@ -37,9 +37,6 @@ export default function ScheduleContainer() {
       </Card.Body>
       <Card.Footer>
         <hr />
-        <div className="stats">
-          <i className="fa fa-history" /> Updated 3 minutes ago
-        </div>
       </Card.Footer>
     </Card>
   );
