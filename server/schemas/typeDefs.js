@@ -6,6 +6,7 @@ type User {
   username: String
   email: String
   password: String
+  address: Address
   isTeacher: Boolean
   autoNotify: Boolean
   events: [Event]
@@ -31,6 +32,19 @@ type User {
     toEmail: String
     subject: String
     text: String
+  }
+  type Address {
+    _id: ID
+    street1: String
+    street2: String
+    city: String
+    state: String
+    zip: String
+    phone1: String
+    phone2: String
+    parentGuardian1: String
+    parentGuardian2: String
+    parentGuardian3: String
   }
 
 

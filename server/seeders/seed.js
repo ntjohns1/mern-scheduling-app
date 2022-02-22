@@ -1,6 +1,7 @@
 const db = require('../config/connection');
-const { User, Event } = require('../models');
+const { User, Event, Address } = require('../models');
 const userSeeds = require('./userSeeds.json');
+const addressSeeds = require('./addressSeeds.json');
 const minute = 1000 * 60;
 const hour = minute * 60;
 const day = hour * 24;
@@ -22,7 +23,17 @@ function format(date) {
 }
 db.once('open', async () => {
   await User.deleteMany({});
-  const users = await User.create(userSeeds);
+  await Address.deleteMany({});
+  
+  const temp = await User.create(userSeeds);
+  const addresses = await Address.create(addressSeeds);
+  
+  for (let i = 0; i < temp.length; i++) {
+    temp[i].address = addresses[i];
+  }
+  const users = await User.create(temp);
+
+  console.log(users);
 
   await Event.deleteMany({});
 
@@ -161,3 +172,5 @@ db.once('open', async () => {
   console.log('all done!');
   process.exit(0);
 });
+
+// 

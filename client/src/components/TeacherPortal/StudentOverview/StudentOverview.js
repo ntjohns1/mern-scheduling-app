@@ -16,7 +16,6 @@ export default function StudentOverview() {
     const students = data?.users || [];
 
 
-
     useEffect(() => {
         //fetchUsers();
 
@@ -40,7 +39,7 @@ export default function StudentOverview() {
                             <Card.Body>
                                 <Card.Title className='text-center'>Students</Card.Title>
                                 {students && students.map((student) => (
-                                    <StudentTag students={student} key={student._id} />
+                                    <StudentTag students={student} key={student._id}/>
                                 ))}
                             </Card.Body>
                         </Card>

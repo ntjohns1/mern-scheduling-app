@@ -15,6 +15,7 @@ import Login from './pages/login';
 import Signup from './pages/signup';
 import Students from './pages/students';
 import SingleLesson from './components/Schedule/SingleLesson';
+import SingleStudent from './components/TeacherPortal/StudentOverview/SingleStudent';
 import Schedule from './pages/schedule';
 import Messages from './pages/messages'
 import Cal from './pages/calendar';
@@ -56,13 +57,13 @@ const loggedStatus = Auth.loggedIn();
 
 export default function App() {
 	return (
-			<ApolloProvider client={client}>
-				<StoreProvider>
+		<ApolloProvider client={client}>
+			<StoreProvider>
 				<Router history={history}>
 					<Nav />
 					<Switch>
 						<Route exact path='/'>
-						{loggedStatus ? <Redirect to="/portal" /> : <Home />}
+							{loggedStatus ? <Redirect to="/portal" /> : <Home />}
 						</Route>
 						<Route exact path='/portal'>
 							<Portal />
@@ -91,9 +92,12 @@ export default function App() {
 						<Route exact path='/signup'>
 							<Signup />
 						</Route>
+						<Route exact path='/:studentId'>
+							<SingleStudent />
+						</Route>
 					</Switch>
 				</Router>
-				</ StoreProvider>
-			</ApolloProvider>
+			</ StoreProvider>
+		</ApolloProvider>
 	);
 };

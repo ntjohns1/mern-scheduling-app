@@ -8,10 +8,10 @@ const mailer = require('../utils/mailer');
 const resolvers = {
   Query: {
     users: async () => {
-      return User.find().populate('events').populate('messages');
+      return User.find().populate('events').populate('messages').populate('address');
     },
     user: async (parent, { _id }) => {
-      return User.findOne({ _id }).populate('events').populate('messages');
+      return User.findOne({ _id }).populate('events').populate('messages').populate('address');
     },
     events: async () => {
       return Event.find().sort({ date: -1 });

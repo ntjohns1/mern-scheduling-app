@@ -1,15 +1,20 @@
 import React from 'react';
 import { Toast } from 'react-bootstrap';
+import Auth from '../../../utils/auth';
 
 export default function StudentTag({ students }) {
+     function goToSingleStudent(studentId) {
+        if (Auth.loggedIn()) {
+          document.location.replace(`/${studentId}`);
+        }
+      }
+
     return (
    
-                <Toast>
+                <Toast onClick={() => goToSingleStudent(students._id)}>
                     <Toast.Header closeButton={false}>
                         <strong className="me-auto">{students.username}</strong>
-                        {/* <small>11 mins ago</small> */}
                     </Toast.Header>
-                    {/* <Toast.Body>Hello, world! This is a toast message.</Toast.Body> */}
                 </Toast>
      
     )
