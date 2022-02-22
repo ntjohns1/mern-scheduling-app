@@ -6,6 +6,8 @@ type User {
   username: String
   email: String
   password: String
+  firstName: String
+  lastName: String
   address: Address
   isTeacher: Boolean
   autoNotify: Boolean

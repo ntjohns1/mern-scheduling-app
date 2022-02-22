@@ -31,6 +31,7 @@ db.once('open', async () => {
   for (let i = 0; i < temp.length; i++) {
     temp[i].address = addresses[i];
   }
+
   const users = await User.create(temp);
 
   console.log(users);

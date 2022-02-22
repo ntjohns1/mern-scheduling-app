@@ -18,9 +18,11 @@ function SingleStudent({ students }) {
 
 
   function goToPortal() {
-      document.location.replace(`/portal`);
+    document.location.replace(`/portal`);
   }
-  console.log(student);
+
+  let address = {...student.address}
+  console.log(address);
 
   return (
     <>
@@ -30,12 +32,12 @@ function SingleStudent({ students }) {
             <Card className="card-user">
               <Card.Body>
                 <div className="author">
-                    <img
-                      alt="..."
-                      className="avatar border-gray"
-                      src={"http://placecorgi.com/260/180"}
-                    />
-                    <h5 className="title">Chet Faker</h5>
+                  <img
+                    alt="..."
+                    className="avatar border-gray"
+                    src={"http://placecorgi.com/260/180"}
+                  />
+                  <h5 className="title">{student.username}</h5>
                 </div>
               </Card.Body>
               <Card.Footer>
@@ -74,22 +76,11 @@ function SingleStudent({ students }) {
               <Card.Body>
                 <Form>
                   <Row>
-                    <Col className="pr-1" md="5">
-                      <FormGroup>
-                        <label>Company (disabled)</label>
-                        <Form.Control
-                          defaultValue="Creative Code Inc."
-                          disabled
-                          placeholder="Company"
-                          type="text"
-                        />
-                      </FormGroup>
-                    </Col>
                     <Col className="px-1" md="3">
                       <FormGroup>
                         <label>Username</label>
                         <Form.Control
-                          defaultValue="michael23"
+                          defaultValue={student.username}
                           placeholder="Username"
                           type="text"
                         />
@@ -100,7 +91,10 @@ function SingleStudent({ students }) {
                         <label htmlFor="exampleInputEmail1">
                           Email address
                         </label>
-                        <Form.Control placeholder="Email" type="email" />
+                        <Form.Control
+                          defaultValue={student.email}
+                          placeholder="Email"
+                          type="email" />
                       </FormGroup>
                     </Col>
                   </Row>
@@ -109,7 +103,7 @@ function SingleStudent({ students }) {
                       <FormGroup>
                         <label>First Name</label>
                         <Form.Control
-                          defaultValue="Chet"
+                          defaultValue={student.firstName}
                           placeholder="Company"
                           type="text"
                         />
@@ -119,7 +113,7 @@ function SingleStudent({ students }) {
                       <FormGroup>
                         <label>Last Name</label>
                         <Form.Control
-                          defaultValue="Faker"
+                          defaultValue={student.lastName}
                           placeholder="Last Name"
                           type="text"
                         />
@@ -131,7 +125,19 @@ function SingleStudent({ students }) {
                       <FormGroup>
                         <label>Address</label>
                         <Form.Control
-                          defaultValue="Melbourne, Australia"
+                          defaultValue={address.street1}
+                          placeholder="Home Address"
+                          type="text"
+                        />
+                      </FormGroup>
+                    </Col>
+                  </Row>
+                  <Row>
+                    <Col md="12">
+                      <FormGroup>
+                        <label>Address</label>
+                        <Form.Control
+                          defaultValue={address.street2}
                           placeholder="Home Address"
                           type="text"
                         />
@@ -143,7 +149,7 @@ function SingleStudent({ students }) {
                       <FormGroup>
                         <label>City</label>
                         <Form.Control
-                          defaultValue="Melbourne"
+                          defaultValue={address.city}
                           placeholder="City"
                           type="text"
                         />
@@ -151,34 +157,79 @@ function SingleStudent({ students }) {
                     </Col>
                     <Col className="px-1" md="4">
                       <FormGroup>
-                        <label>Country</label>
+                        <label>State</label>
                         <Form.Control
-                          defaultValue="Australia"
-                          placeholder="Country"
+                          defaultValue={address.state}
+                          placeholder="State"
                           type="text"
                         />
                       </FormGroup>
                     </Col>
                     <Col className="pl-1" md="4">
                       <FormGroup>
-                        <label>Postal Code</label>
-                        <Form.Control placeholder="ZIP Code" type="number" />
+                        <label>Zip Code</label>
+                        <Form.Control 
+                        defaultValue={address.zip}
+                        placeholder="ZIP Code" 
+                        type="text" />
+                      </FormGroup>
+                    </Col>
+                  </Row>
+                  <Row>
+                    <Col md="6">
+                      <FormGroup>
+                        <label>Primary Phone</label>
+                        <Form.Control
+                          defaultValue={address.phone1}
+                          type="text"
+                        />
+                      </FormGroup>
+                    </Col>
+                    <Col md="6">
+                      <FormGroup>
+                        <label>Secondary Phone</label>
+                        <Form.Control
+                          defaultValue={address.phone2}
+                          type="text"
+                        />
                       </FormGroup>
                     </Col>
                   </Row>
                   <Row>
                     <Col md="12">
                       <FormGroup>
-                        <label>About Me</label>
+                        <label>Contact Name 1</label>
                         <Form.Control
-                          type="textarea"
-                          defaultValue="Oh so, your weak rhyme You doubt I'll bother, reading into it"
+                          defaultValue={address.parentGuardian1}
+                          type="text"
                         />
                       </FormGroup>
                     </Col>
                   </Row>
                   <Row>
-                    <div className="update ml-auto mr-auto">
+                    <Col md="12">
+                      <FormGroup>
+                        <label>Contact Name 2</label>
+                        <Form.Control
+                          defaultValue={address.parentGuardian2}
+                          type="text"
+                        />
+                      </FormGroup>
+                    </Col>
+                  </Row>
+                  <Row>
+                    <Col md="12">
+                      <FormGroup>
+                        <label>Contact Name 3</label>
+                        <Form.Control
+                          defaultValue={address.parentGuardian3}
+                          type="text"
+                        />
+                      </FormGroup>
+                    </Col>
+                  </Row>
+                  <Row>
+                    <div className="update ml-auto mr-auto py-4">
                       <Button
                         className="btn-round"
                         color="primary"

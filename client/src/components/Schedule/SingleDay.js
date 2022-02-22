@@ -59,6 +59,7 @@ export default function SingleDay({ dayRef }) {
     }, [loading, data, dispatch]);
 
     let lessonObj = {...lesson}
+    console.log(lessonObj);
     const timeObj = myDay.map((t) => {
         let tObj = {...t}
         for (let i = 0; i < lesson.length; i++) {

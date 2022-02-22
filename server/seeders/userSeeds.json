@@ -1,48 +1,66 @@
 [
   {
-    "username": "Nelson",
+    "username": "nelson",
     "email": "nelson@nelson.com",
     "password": "password1234",
+    "firstName": "Nelson",
+    "lastName": "Johns",
     "isTeacher": true
   },
   {
-    "username": "Max Kanat-Alexander",
+    "username": "mkAlexander",
     "email": "mkanatalexander@email.com",
-    "password": "password1234"
+    "password": "password1234",
+     "firstName": "Max",
+    "lastName": "Kanat-Alexander"
   },
   {
-    "username": "Kent Beck",
+    "username": "kBeck",
     "email": "kbeck@email.com",
-    "password": "password1234"
+    "password": "password1234",
+     "firstName": "Kent",
+    "lastName": "Beck"
   },
   {
-    "username": "Edward V. Berard",
+    "username": "evBerard",
     "email": "evberard@email.com",
-    "password": "password1234"
+    "password": "password1234",
+     "firstName": "Edward",
+    "lastName": "V. Berard"
   },
   {
-    "username": "Alan Kay",
+    "username": "aKay",
     "email": "akay@email.com",
-    "password": "password1234"
+    "password": "password1234",
+     "firstName": "Alan",
+    "lastName": "Kay"
   },
   {
-    "username": "C.A.R. Hoare",
+    "username": "carHoare",
     "email": "choare@email.com",
-    "password": "password1234"
+    "password": "password1234",
+     "firstName": "C.A.R.",
+    "lastName": "Hoare"
   },
   {
-    "username": "David Thomas",
+    "username": "dThomas",
     "email": "dthomas@email.com",
-    "password": "password1234"
+    "password": "password1234",
+     "firstName": "David",
+    "lastName": "Thomas"
   },
   {
-    "username": "Donald Knuth",
+    "username": "dKnuth",
     "email": "dknuth@email.com",
-    "password": "password1234"
+    "password": "password1234",
+     "firstName": "Donald",
+    "lastName": "Knuth"
   },
   {
-    "username": "Lernantino",
+    "username": "lernantino",
     "email": "lernantino@email.com",
-    "password": "password1234"
+    "password": "password1234",
+     "firstName": "L.E.R.",
+    "lastName": "Nantino"
   }
 ]

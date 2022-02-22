@@ -19,6 +19,16 @@ const userSchema = new Schema({
     required: true,
     minlength: 5,
   },
+  firstName: {
+    type: String,
+    required: true,
+    trim: true,
+  },
+  lastName: {
+    type: String,
+    required: true,
+    trim: true,
+  },
   address:
   {
     type: Schema.Types.ObjectId,
