@@ -3,7 +3,7 @@
 import _ from 'lodash';
 
 import {
-   EVENTS_BY_DATE,
+   GET_EVENTS_BY_DATE,
    FETCH_EVENT,
    ADD_EVENT,
    UPDATE_EVENT,
@@ -13,9 +13,9 @@ import {
 
 const eventReducer = (state = {}, action) => {
     switch(action.type) {
-        case EVENTS_BY_DATE: 
-            return { ...state, ..._.mapKeys(action.payload, '_id') };
-// Not Sure if this on is correct
+        case GET_EVENTS_BY_DATE: 
+        return { ...state, ...action.payload };
+        // Not Sure if this on is correct
             case FETCH_EVENT:
             return { ...state, [action.payload._id]: action.payload }
         case ADD_EVENT:

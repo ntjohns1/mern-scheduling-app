@@ -6,6 +6,9 @@ type User {
   username: String
   email: String
   password: String
+  firstName: String
+  lastName: String
+  address: Address
   isTeacher: Boolean
   autoNotify: Boolean
   events: [Event]
@@ -32,12 +35,26 @@ type User {
     subject: String
     text: String
   }
+  type Address {
+    _id: ID
+    street1: String
+    street2: String
+    city: String
+    state: String
+    zip: String
+    phone1: String
+    phone2: String
+    parentGuardian1: String
+    parentGuardian2: String
+    parentGuardian3: String
+  }
 
 
   type Event {
     _id: ID
     studentId: ID
-    studentName: String
+    firstName: String
+    lastName: String
     date: String
     dayRef: String
     time: String
@@ -53,7 +70,8 @@ type User {
   input AddEventInput {
     _id: ID
     studentId: ID
-    studentName: String
+    firstName: String
+    lastName: String
     date: String
     dayRef: String
     time: String
@@ -79,7 +97,7 @@ type User {
   }
 
   type Mutation {
-    addUser(username: String!, email: String!, password: String!): Auth
+    addUser(username: String!, email: String!, password: String!, firstName: String, LastName: String): Auth
     updateUser(
       _id: ID
       username: String

@@ -5,7 +5,11 @@ const eventSchema = new Schema({
         type: Schema.Types.ObjectId,
         ref: 'User',
       },
-    studentName: {
+    firstName: {
+        type: String,
+        required: false,
+    },
+    lastName: {
         type: String,
         required: false,
     },

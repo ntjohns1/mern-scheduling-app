@@ -8,6 +8,8 @@ query {
         _id
         username
         email
+        firstName
+        lastName
         }
     }
 `;
@@ -17,11 +19,25 @@ export const GET_STUDENT = gql`
     user(_id: $_id) {
       username
       email
+      firstName
+      lastName
       messages {
         _id
         messageText
         messageAuthor
         createdAt
+      }
+      address {
+        street1
+        street2
+        city
+        state
+        zip
+        phone1
+        phone2
+        parentGuardian1
+        parentGuardian2
+        parentGuardian3
       }
     }
   }
@@ -33,6 +49,8 @@ query {
     _id
     username
     email
+    firstName
+    lastName
     isTeacher
   }
 }
@@ -45,7 +63,8 @@ query($dayRef: String) {
   eventsByDate(dayRef: $dayRef) {
     _id
     studentId
-    studentName
+    firstName
+    lastName
   	time
   	dayRef
     description
@@ -58,7 +77,8 @@ query event($_id: ID!) {
   event(_id: $_id) {
     _id
     studentId
-    studentName
+    firstName
+    lastName
     date
     dayRef
     time

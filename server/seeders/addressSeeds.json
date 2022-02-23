@@ -1,0 +1,101 @@
+[
+  {
+    "street1": "1478 Pine St",
+    "street2": "",
+    "city": "Durham",
+    "state": "NC",
+    "zip": "27716",
+    "phone1": "555-555-5555",
+    "phone2": "",
+    "parentGuardian1": "Susan",
+    "parentGuardian2": "Tom"
+  },
+  {
+    "street1": "157 Green St.",
+    "street2": "APT 235",
+    "city": "Chapel Hill",
+    "state": "NC",
+    "zip": "27715",
+    "phone1": "555-555-5556",
+    "phone2": "",
+    "parentGuardian1": "Karen",
+    "parentGuardian2": "Jim"
+  },
+  {
+    "street1": "3245 Russell Ave",
+    "street2": "",
+    "city": "Durham",
+    "state": "NC",
+    "zip": "27715",
+    "phone1": "555-555-5557",
+    "phone2": "555-555-5558",
+    "parentGuardian1": "Henrietta",
+    "parentGuardian2": "Jared"
+  },
+  {
+    "street1": "23 West St",
+    "street2": "APT G",
+    "city": "Durham",
+    "state": "NC",
+    "zip": "27717",
+    "phone1": "555-555-5559",
+    "phone2": "",
+    "parentGuardian1": "Julia",
+    "parentGuardian2": "Dale"
+  },
+  {
+    "street1": "45 Thurmin Ln",
+    "street2": "",
+    "city": "Raleigh",
+    "state": "NC",
+    "zip": "27727",
+    "phone1": "555-554-5551",
+    "phone2": "",
+    "parentGuardian1": "Daria",
+    "parentGuardian2": ""
+  },
+  {
+    "street1": "34 James St",
+    "street2": "",
+    "city": "Durham",
+    "state": "NC",
+    "zip": "27513",
+    "phone1": "556-666-4456",
+    "phone2": "",
+    "parentGuardian1": "Jake",
+    "parentGuardian2": ""
+  },
+  {
+    "street1": "2678 Westfield Ave",
+    "street2": "",
+    "city": "Chapel Hill",
+    "state": "NC",
+    "zip": "27715",
+    "phone1": "234-432-2343",
+    "phone2": "",
+    "parentGuardian1": "Sarah",
+    "parentGuardian2": "Susan"
+  },
+  {
+    "street1": "134 Jeeves St",
+    "street2": "",
+    "city": "Durham",
+    "state": "NC",
+    "zip": "27714",
+    "phone1": "234-234-4550",
+    "phone2": "",
+    "parentGuardian1": "Steve",
+    "parentGuardian2": "Kim"
+  },
+  {
+    "street1": "738 Jarles St",
+    "street2": "APT A",
+    "city": "Chapel Hill",
+    "state": "NC",
+    "zip": "27710",
+    "phone1": "828-349-9239",
+    "phone2": "737-987-9393",
+    "parentGuardian1": "Darlene",
+    "parentGuardian2": "Bob"
+  }
+]

@@ -8,10 +8,10 @@ const mailer = require('../utils/mailer');
 const resolvers = {
   Query: {
     users: async () => {
-      return User.find().populate('events').populate('messages');
+      return User.find().populate('events').populate('messages').populate('address');
     },
     user: async (parent, { _id }) => {
-      return User.findOne({ _id }).populate('events').populate('messages');
+      return User.findOne({ _id }).populate('address').populate('events').populate('messages');
     },
     events: async () => {
       return Event.find().sort({ date: -1 });
@@ -32,8 +32,8 @@ const resolvers = {
   },
 
   Mutation: {
-    addUser: async (parent, { username, email, password }) => {
-      const user = await User.create({ username, email, password });
+    addUser: async (parent, { username, email, password, firstName, lastName }) => {
+      const user = await User.create({ username, email, password, firstName, lastName });
       const token = signToken(user);
       return { token, user };
     },
@@ -53,9 +53,8 @@ const resolvers = {
     deleteUser: async (parent, { _id }, context) => {
       try {
         if (context.user) {
-        const user = await User.deleteOne({ _id: _id });
-
-        return user;
+          const user = await User.deleteOne({ _id: _id });
+          return user;
         }
         throw new AuthenticationError('Not Logged In')
       } catch (error) {
@@ -97,7 +96,7 @@ const resolvers = {
     },
     addMessage: async (parent, { _id, messageText }, context) => {
       if (context.user) {
-  
+
         const message = await Message.create({
           messageText,
           messageAuthor: context.user.username
@@ -115,15 +114,15 @@ const resolvers = {
     },
     sendEmail: async (parent, { input }, context) => {
       if (context.user.isTeacher) {
-  
+
         const mail = await Email.create({ ...input });
-  
+
         const email = input.email
         const senderName = input.senderName
         const toEmail = input.toEmail
         const subject = input.subject
         const text = input.text
-        
+
         await mailer(email, senderName, toEmail, subject, text).then(() => {
           console.log(`Sent the message "${text}" from <${senderName}> ${email}.`);
         }).catch((error) => {
@@ -137,7 +136,7 @@ const resolvers = {
     deleteEvent: async (parent, { _id, userId }, context) => {
       if (context.user.isTeacher) {
         // userId = mongoose.Types.ObjectId('618d324f6de85e6d127da089');
-        
+
         const event = await Event.findOneAndDelete({
           _id: _id
         });
@@ -153,18 +152,18 @@ const resolvers = {
         );
 
         return event;
-        }
+      }
       throw new AuthenticationError('You need to be logged in!');
     },
     updateEvent: async (parent, args) => {
       if (context.user.isTeacher) {
-      const { _id } = args.input;
-       
-      const event = await Event.findOneAndUpdate(
-        { _id: _id },
-        { $set: {...args.input}},
-        { new: true });
-      return event;
+        const { _id } = args.input;
+
+        const event = await Event.findOneAndUpdate(
+          { _id: _id },
+          { $set: { ...args.input } },
+          { new: true });
+        return event;
       }
       throw new AuthenticationError('You need to be logged in!');
     },

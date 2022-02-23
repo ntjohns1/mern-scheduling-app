@@ -6,7 +6,7 @@ import DeleteUserBtn from './DeleteUserBtn';
 export default function UpdateUser({ students }) {
     const [formState, setFormState] = useState({
         _id: students._id,
-        username: students.username,
+        username: students.firstName + " " + students.lastName,
         email: students.email
     });
 

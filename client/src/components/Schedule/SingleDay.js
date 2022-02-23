@@ -1,5 +1,12 @@
+import { useEffect } from 'react';
 import { Row, Col, Card, Toast } from 'react-bootstrap';
 import myDay from '../../utils/helpers/times';
+import { useQuery } from '@apollo/client';
+import { useDispatch, useSelector } from 'react-redux';
+import { EVENTS_BY_DATE } from '../../utils/queries';
+import { GET_EVENTS_BY_DATE } from '../../store/actions';
+import "react-day-picker/lib/style.css";
+import { format, parse } from 'date-fns';
 
 
 const styles = {
@@ -33,19 +40,49 @@ const styles = {
     },
 };
 
+export default function SingleDay({ dayRef }) {
+    const dispatch = useDispatch();
+    const events = useSelector((state) => Object.values(state.events));
 
-export default function SingleDay() {
+    const { loading, data } = useQuery(EVENTS_BY_DATE, {
+        variables: { dayRef: dayRef },
+    });
+    const lesson = data?.eventsByDate || [];
+
+    useEffect(() => {
+        if (events.length === 0 && data) {
+            dispatch({
+                type: GET_EVENTS_BY_DATE,
+                payload: data.eventsByDate
+            })
+        }
+    }, [loading, data, dispatch]);
+
+    let lessonObj = {...lesson}
+    console.log(lessonObj);
+    const timeObj = myDay.map((t) => {
+        let tObj = {...t}
+        for (let i = 0; i < lesson.length; i++) {
+          if (lessonObj[i].time === tObj.time) {
+            tObj.student = lessonObj[i].firstName + " " + lessonObj[i].lastName;
+          }
+        }
+        return tObj
+    })
+
+    console.log(timeObj);
+
     return (
         <Card>
-            <Card.Title className='mt-3'> DoW MM/DD </Card.Title >
+            <Card.Title className='mt-3'> {dayRef} </Card.Title >
             <Card.Body style={styles.dayCard} scrollTo>
-                {myDay.map((day) => (
-                    <Toast className='px-3'>
+                {timeObj.map((day, index) => (
+                    <Toast className='px-3' key={index}>
                         <Col xs={4} >
                             <p>{day.hour}</p>
                         </Col >
                         <Col xs={8} >
-
+                            <p>{day.student}</p>
                         </Col>
                     </Toast>
                 ))}

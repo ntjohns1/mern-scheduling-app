@@ -19,11 +19,27 @@ const userSchema = new Schema({
     required: true,
     minlength: 5,
   },
-  isTeacher:{
+  firstName: {
+    type: String,
+    required: true,
+    trim: true,
+  },
+  lastName: {
+    type: String,
+    required: true,
+    trim: true,
+  },
+  address:
+  {
+    type: Schema.Types.ObjectId,
+    required: false,
+    ref: 'Address',
+  },
+  isTeacher: {
     type: Boolean,
     default: false,
   },
-  autoNotify:{
+  autoNotify: {
     type: Boolean,
     default: true,
   },
