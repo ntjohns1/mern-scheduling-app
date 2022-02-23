@@ -53,7 +53,8 @@ type User {
   type Event {
     _id: ID
     studentId: ID
-    studentName: String
+    firstName: String
+    lastName: String
     date: String
     dayRef: String
     time: String
@@ -69,7 +70,8 @@ type User {
   input AddEventInput {
     _id: ID
     studentId: ID
-    studentName: String
+    firstName: String
+    lastName: String
     date: String
     dayRef: String
     time: String
@@ -95,7 +97,7 @@ type User {
   }
 
   type Mutation {
-    addUser(username: String!, email: String!, password: String!): Auth
+    addUser(username: String!, email: String!, password: String!, firstName: String, LastName: String): Auth
     updateUser(
       _id: ID
       username: String

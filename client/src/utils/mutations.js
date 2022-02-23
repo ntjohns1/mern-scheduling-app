@@ -81,7 +81,8 @@ mutation($input: AddEventInput) {
   updateEvent(input: $input) {
     _id
     studentId
-    studentName
+    firsttName
+    lastName
     date
     dayRef
     time

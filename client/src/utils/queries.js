@@ -63,7 +63,8 @@ query($dayRef: String) {
   eventsByDate(dayRef: $dayRef) {
     _id
     studentId
-    studentName
+    firstName
+    lastName
   	time
   	dayRef
     description
@@ -76,7 +77,8 @@ query event($_id: ID!) {
   event(_id: $_id) {
     _id
     studentId
-    studentName
+    firstName
+    lastName
     date
     dayRef
     time

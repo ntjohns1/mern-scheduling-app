@@ -64,7 +64,7 @@ export default function SingleDay({ dayRef }) {
         let tObj = {...t}
         for (let i = 0; i < lesson.length; i++) {
           if (lessonObj[i].time === tObj.time) {
-            tObj.student = lessonObj[i].studentName;
+            tObj.student = lessonObj[i].firstName + " " + lessonObj[i].lastName;
           }
         }
         return tObj

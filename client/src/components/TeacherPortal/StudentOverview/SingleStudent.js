@@ -37,7 +37,7 @@ function SingleStudent({ students }) {
                     className="avatar border-gray"
                     src={"http://placecorgi.com/260/180"}
                   />
-                  <h5 className="title">{student.username}</h5>
+                  <h5 className="title">{student.firstName} {student.lastName}</h5>
                 </div>
               </Card.Body>
               <Card.Footer>
@@ -229,7 +229,7 @@ function SingleStudent({ students }) {
                     </Col>
                   </Row>
                   <Row>
-                    <div className="update ml-auto mr-auto py-4">
+                    <div className="update ml-auto mr-auto py-4`">
                       <Button
                         className="btn-round"
                         color="primary"
