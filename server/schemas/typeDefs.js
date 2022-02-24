@@ -49,7 +49,6 @@ type User {
     parentGuardian3: String
   }
 
-
   type Event {
     _id: ID
     studentId: ID
@@ -59,6 +58,24 @@ type User {
     dayRef: String
     time: String
     description: String
+  }
+
+  type Media {
+    _id: ID
+    title: String
+    description: String
+    postedBy: User
+    createdAt: String
+    updatedAt: String
+  }
+
+  input AddMediaInput {
+    _id: ID
+    title: String
+    description: String
+    postedBy: User
+    createdAt: String
+    updatedAt: String
   }
 
   input UpdateUserInput {
@@ -94,6 +111,8 @@ type User {
     eventsByDate(dayRef: String): [Event]
     event(_id: ID!): Event
     me: User
+    media(_id: ID!): Media
+    allMedia: [Media]
   }
 
   type Mutation {
@@ -112,6 +131,9 @@ type User {
     sendEmail(input: SendEmailInput): Email
     deleteEvent(_id: ID!, userId: ID): Event
     removeMessage(userId: ID!, messageId: ID!): User
+    addMedia(input: AddMediaInput): Media
+    deleteMedia(_id: ID): Media
+    updateMedia(input: AddMediaInput)
   }
 `;
 
