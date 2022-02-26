@@ -64,7 +64,7 @@ type User {
     _id: ID
     title: String
     description: String
-    postedBy: User
+    postedBy: ID
     createdAt: String
     updatedAt: String
   }
@@ -73,7 +73,7 @@ type User {
     _id: ID
     title: String
     description: String
-    postedBy: User
+    postedBy: ID
     createdAt: String
     updatedAt: String
   }
@@ -133,7 +133,7 @@ type User {
     removeMessage(userId: ID!, messageId: ID!): User
     addMedia(input: AddMediaInput): Media
     deleteMedia(_id: ID): Media
-    updateMedia(input: AddMediaInput)
+    updateMedia(input: AddMediaInput): Media
   }
 `;
 

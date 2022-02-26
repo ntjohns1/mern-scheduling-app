@@ -1,8 +1,16 @@
 const { AuthenticationError } = require('apollo-server-express');
-const { User, Event, Message, Email } = require('../models');
+const { User, Event, Message, Email, Media } = require('../models');
 const { signToken } = require('../utils/auth');
 const mongoose = require('mongoose')
 const mailer = require('../utils/mailer');
+const formidable = require('formidable');
+const fs = require('fs');
+
+//media streaming
+let gridfs = null
+mongoose.connection.on('connected', () => {
+  gridfs = new mongoose.mongo.GridFSBucket(mongoose.connection.db)
+})
 
 
 const resolvers = {
@@ -28,6 +36,9 @@ const resolvers = {
         return User.findOne({ _id: context.user._id }).populate('events');
       }
       throw new AuthenticationError('You need to be logged in!');
+    },
+    media: async (parent, { _id }) => {
+      return Media.findOne({ _id: _id });
     },
   },
 
@@ -183,6 +194,39 @@ const resolvers = {
         );
       }
       throw new AuthenticationError('You need to be logged in!');
+    },
+    addMedia: async (parent, { input }, req, res, context) => {
+      // if (context.user) {
+        let form = new formidable.IncomingForm()
+        form.keepExtensions = true;
+        form.parse(req, async (err, fields, files) => {
+          if (err) {
+            return res.status(400).json({
+              error: "Video could not be uploaded"
+            })
+          }
+          let args = { ...input };
+          let media = new Media(fields)
+          media.postedBy = req.profile
+          media.title = args.title;
+          if (files.video) {
+            let writestream = gridfs.openUploadStream(media._id, {
+              contentType: files.video.type || 'binary/octet-stream'
+            })
+            fs.createReadStream(files.video.path).pipe(writestream)
+          }
+          try {
+            let result = await media.save()
+            res.status(200).json(result)
+          }
+          catch (err) {
+            return res.status(400).json({
+              error: errorHandler.getErrorMessage(err)
+            })
+          }
+        })
+      // } else
+      //   throw new AuthenticationError('You need to be logged in!');
     },
   },
 };

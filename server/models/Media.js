@@ -8,7 +8,10 @@ const mediaSchema = new Schema({
   description: {
     type: String,
   },
-  postedBy: {type: mongoose.Schema.ObjectId, ref: 'User'},
+  postedBy: {
+    type: Schema.Types.ObjectId,
+    ref: 'User',
+  },  
   createdAt: {
     type: Date,
     default: Date.now,
